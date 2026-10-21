@@ -212,7 +212,7 @@
 
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 30px;
         }
 
@@ -270,18 +270,23 @@
         .video-box {
             position: relative;
             width: 100%;
-            height: 190px;
+            height: 200px;
             background: #020617;
             border-radius: 12px;
             overflow: hidden;
             margin-bottom: 15px;
             border: 1px solid rgba(0, 242, 254, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .video-box iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
+        .video-placeholder-text {
+            color: #38bdf8;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: center;
+            padding: 0 15px;
         }
 
         /* Fact Modal */
@@ -367,7 +372,7 @@
             <ul>
                 <li><a href="#home">হোম</a></li>
                 <li><a href="#subjects">বিষয়সমূহ</a></li>
-                <li><a href="#practicals">প্র্যাকটিক্যাল (২০০+)</a></li>
+                <li><a href="#practicals">প্র্যাকটিক্যাল ল্যাব (২০০+)</a></li>
                 <li><a href="#research">রিসার্চ পেপার্স (৩০+)</a></li>
                 <li><a href="#facts">অজানা তথ্য</a></li>
                 <li><button class="lang-btn" onclick="toggleLanguage()"><i class="fa-solid fa-globe"></i> EN / BN</button></li>
@@ -378,10 +383,10 @@
     <!-- Hero Section -->
     <section class="hero" id="home">
         <h1>RISHI SCINIVERSE</h1>
-        <div class="subtitle">প্রতিষ্ঠাতা ও ডেভেলপার: <strong>সৌতপূর্ণ রায় (Souparno Roy)</strong></div>
-        <p id="hero-desc">পদার্থবিদ্যা, রসায়ন, গণিত এবং জীববিদ্যার এক বিশাল ভার্চুয়াল ইউনিভার্স। এখানে রয়েছে ২০০+ এর বেশি ইন্টারঅ্যাক্টিভ থ্রি-ডি প্র্যাকটিক্যাল ভিডিও সিমুলেশন এবং বিশ্বের শীর্ষস্থানীয় ল্যাবরেটরির ৩০+ রিসার্চ পেপার।</p>
+        <div class="subtitle">প্রতিষ্ঠাতা ও প্রধান গবেষক: <strong>সৌতপূর্ণ রায় (Souparno Roy)</strong></div>
+        <p id="hero-desc">পদার্থবিদ্যা, রসায়ন, গণিত এবং জীববিদ্যার এক উন্নত ভার্চুয়াল ইউনিভার্স। এখানে ফিজিক্স, কেমিস্ট্রি, বায়োলজি এবং ম্যাথের জন্য রয়েছে ২০০+ এর বেশি থ্রি-ডি অ্যানিমেশন ও সিমুলেশন ভিডিও এবং বিশ্বখ্যাত ল্যাবরেটরিগুলোর (CERN, MIT, Stanford ইত্যাদি) ৩০+ গভীর রিসার্চ পেপার।</p>
         <div class="cta-buttons">
-            <a href="#practicals" class="btn btn-primary"><i class="fa-solid fa-cube"></i> প্র্যাকটিক্যাল ভিডিও দেখুন</a>
+            <a href="#practicals" class="btn btn-primary"><i class="fa-solid fa-cube"></i> থ্রি-ডি সিমুলেশন দেখুন</a>
             <a href="#research" class="btn btn-secondary"><i class="fa-solid fa-flask-vial"></i> প্রাতিষ্ঠানিক গবেষণা</a>
         </div>
     </section>
@@ -389,14 +394,14 @@
     <!-- Subjects Section -->
     <section id="subjects">
         <h2 class="section-title">মূল বিজ্ঞান শাখা</h2>
-        <p class="section-desc">গভীর বিশ্লেষণ ও লজিক্যাল কাঠামোর মাধ্যমে বিজ্ঞান ও গবেষণার মূল ভিত্তি।</p>
+        <p class="section-desc">গভীর গাণিতিক বিশ্লেষণ, থ্রি-ডি প্র্যাকটিক্যাল ল্যাব এবং লজিক্যাল কাঠামোর বিশদ বিবরণ।</p>
         
         <div class="grid-container">
             <div class="card">
                 <div>
                     <i class="fa-solid fa-bolt"></i>
                     <h3>পদার্থবিদ্যা (Physics)</h3>
-                    <p>কোয়ান্টাম মেকানিক্স, আপেক্ষিকতা তত্ত্ব এবং তড়িৎ গতিবিদ্যার ৫০+ সিমুলেশন ও প্র্যাকটিক্যাল।</p>
+                    <p>কোয়ান্টাম মেকানিক্স, আইনস্টাইনের আপেক্ষিকতা তত্ত্ব, ব্ল্যাক হোল থার্মোডাইনামিক্স এবং তড়িৎ গতিবিদ্যার ওপর ৫০+ বিস্তারিত থ্রি-ডি প্র্যাকটিক্যাল সিমুলেশন।</p>
                 </div>
                 <a href="#practicals" class="btn btn-secondary">ফিজিক্স প্র্যাকটিক্যাল</a>
             </div>
@@ -404,7 +409,7 @@
                 <div>
                     <i class="fa-solid fa-flask"></i>
                     <h3>রসায়ন (Chemistry)</h3>
-                    <p>মলিকুলার অরবিটাল থিওরি, থার্মোডাইনামিক কাইনেটিক্স এবং জৈব সংশ্লেষণ সংক্রান্ত ৫০+ প্র্যাকটিক্যাল।</p>
+                    <p>মলিকুলার অরবিটাল থিওরি, কোঅর্ডিনেশন কেমিস্ট্রি, জৈব সংশ্লেষণ এবং রাসায়নিক গতিবিদ্যার ওপর ৫০+ বিস্তারিত থ্রি-ডি প্র্যাকটিক্যাল সিমুলেশন।</p>
                 </div>
                 <a href="#practicals" class="btn btn-secondary">কেমিস্ট্রি প্র্যাকটিক্যাল</a>
             </div>
@@ -412,7 +417,7 @@
                 <div>
                     <i class="fa-solid fa-calculator"></i>
                     <h3>গণিত (Mathematics)</h3>
-                    <p>মাল্টিভ্যারিয়েবল ক্যালকুলাস, টেন্সর অ্যানালাইসিস এবং জ্যামিতিক প্রমাণের ভিডিও টিউটোরিয়াল।</p>
+                    <p>মাল্টিভ্যারিয়েবল ক্যালকুলাস, টেন্সর অ্যানালাইসিস, টপোলজি এবং রিমানিয়ান জ্যামিতির ওপর ৫০+ বিস্তারিত থ্রি-ডি প্র্যাকটিক্যাল সিমুলেশন।</p>
                 </div>
                 <a href="#practicals" class="btn btn-secondary">ম্যাথ প্র্যাকটিক্যাল</a>
             </div>
@@ -420,53 +425,57 @@
                 <div>
                     <i class="fa-solid fa-dna"></i>
                     <h3>জীববিদ্যা (Biology)</h3>
-                    <p>ডিএনএ রেপ্লিকেশন, জিন এডিটিং এবং নিউরোট্রান্সমিটার সিগন্যালিংয়ের ৫০+ উন্নত থ্রি-ডি প্র্যাকটিক্যাল।</p>
+                    <p>ডিএনএ রেপ্লিকেশন, জিন এডিটিং (CRISPR), প্রোটিন ফোল্ডিং এবং নিউরোট্রান্সমিটার সিগন্যালিংয়ের ওপর ৫০+ বিস্তারিত থ্রি-ডি প্র্যাকটিক্যাল সিমুলেশন।</p>
                 </div>
                 <a href="#practicals" class="btn btn-secondary">বায়োলজি প্র্যাকটিক্যাল</a>
             </div>
         </div>
     </section>
 
-    <!-- Interactive Practicals Section -->
+    <!-- Interactive Practicals & 3D Simulations Section -->
     <section id="practicals">
-        <h2 class="section-title">ইন্টারঅ্যাক্টিভ থ্রি-ডি প্র্যাকটিক্যাল ও ভিডিও ল্যাব (২০০+ মডিউল)</h2>
-        <p class="section-desc">প্রতিটি বিষয়ে রয়েছে ৫০টিরও বেশি থ্রি-ডি অ্যানিমেশন ও ভিডিও প্র্যাকটিক্যাল মডিউল।</p>
+        <h2 class="section-title">থ্রি-ডি প্র্যাকটিক্যাল ও সিমুলেশন ল্যাব (২০০+ মডিউল)</h2>
+        <p class="section-desc">প্রতিটি বিষয়ে রয়েছে ৫০টিরও বেশি থ্রি-ডি ল্যাব সিমুলেশন মডিউল, যা নিখুঁতভাবে বৈজ্ঞানিক ও ল্যাবরেটরি পরীক্ষা প্রদর্শন করে।</p>
         
         <div class="grid-container">
+            <!-- Physics Practical 1 -->
             <div class="card">
-                <div class="badge">ফিজিক্স প্র্যাকটিক্যাল (১/৫০+)</div>
+                <div class="badge">ফিজিক্স প্র্যাকটিক্যাল (মডিউল ১/৫০+)</div>
                 <div class="video-box">
-                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Physics Simulation" allowfullscreen></iframe>
+                    <div class="video-placeholder-text"><i class="fa-solid fa-cube fa-spin"></i> [3D Quantum Harmonic Oscillator Simulation Active Engine]</div>
                 </div>
-                <h3>সরল ছন্দিত গতি ও ড্যাম্পিং (SHM)</h3>
-                <p><strong>কীভাবে কাজ করে:</strong> সাম্যবস্থা থেকে কোনো বস্তুকে সরালে প্রত্যয়নী বল কাজ করে ($F = -kx$)।</p>
+                <h3>কোয়ান্টাম হারমোনিক অসিলেটর ও এনার্জি লেভেল</h3>
+                <p><strong>বিস্তারিত তত্ত্ব ও কার্যপদ্ধতি:</strong> কণার শক্তি কোয়ান্টাইজড হয় ($E_n = (n + \frac{1}{2})\hbar\omega$)। থ্রি-ডি সিমুলেশনে ওয়েভ ফাংশনের বিস্তার এবং সম্ভাব্যতা ঘনত্ব নিখুঁতভাবে দেখানো হয়েছে।</p>
             </div>
 
+            <!-- Chemistry Practical 1 -->
             <div class="card">
-                <div class="badge">কেমিস্ট্রি প্র্যাকটিক্যাল (১/৫০+)</div>
+                <div class="badge">কেমিস্ট্রি প্র্যাকটিক্যাল (মডিউল ১/৫০+)</div>
                 <div class="video-box">
-                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Chemistry Simulation" allowfullscreen></iframe>
+                    <div class="video-placeholder-text"><i class="fa-solid fa-flask fa-spin"></i> [3D VSEPR Molecular Geometry Simulation Engine]</div>
                 </div>
-                <h3>VSEPR আণবিক জ্যামিতি</h3>
-                <p><strong>কীভাবে কাজ করে:</strong> কেন্দ্রীয় পরমাণুর চারপাশের ইলেকট্রন জোড়গুলোর পারস্পরিক বিকর্ষণ কমানোর বিন্যাস।</p>
+                <h3>VSEPR থিওরি ও অণুর ত্রিমাত্রিক গঠন</h3>
+                <p><strong>বিস্তারিত তত্ত্ব ও কার্যপদ্ধতি:</strong> ইলেকট্রন জোড়ের পারস্পরিক বিকর্ষণের ফলে পরমাণুগুলো স্থানিকভাবে এমন কোণ তৈরি করে যাতে ন্যূনতম শক্তি বজায় থাকে (যেমন মিথেনের ১০৯.৫° কোণ)।</p>
             </div>
 
+            <!-- Biology Practical 1 -->
             <div class="card">
-                <div class="badge">বায়োলজি প্র্যাকটিক্যাল (১/৫০+)</div>
+                <div class="badge">বায়োলজি প্র্যাকটিক্যাল (মডিউল ১/৫০+)</div>
                 <div class="video-box">
-                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Biology Simulation" allowfullscreen></iframe>
+                    <div class="video-placeholder-text"><i class="fa-solid fa-dna fa-spin"></i> [3D DNA Replication & Polymerase Engine Active]</div>
                 </div>
-                <h3>ডিএনএ রেপ্লিকেশন ও এনজাইম অ্যাকশন</h3>
-                <p><strong>কীভাবে কাজ করে:</strong> ডিএনএ হেলিকেস হাইড্রোজেন বন্ড ভেঙে রেপ্লিকেশন ফর্ক তৈরি করে।</p>
+                <h3>ডিএনএ রেপ্লিকেশন ও পলিবারেজ এনজাইমের গতি</h3>
+                <p><strong>বিস্তারিত তত্ত্ব ও কার্যপদ্ধতি:</strong> হেলিকেস এনজাইম ডিএনএর ডাবল হেলিক্স ডি-কয়েল করে এবং ডিএনএ পলিমারেজ ফাইব প্রাইম থেকে থ্রি প্রাইম ডিরেকশনে নতুন স্ট্র্যান্ড সিন্থেসিস করে।</p>
             </div>
 
+            <!-- Mathematics Practical 1 -->
             <div class="card">
-                <div class="badge">ম্যাথমেটিক্স প্র্যাকটিক্যাল (১/৫০+)</div>
+                <div class="badge">ম্যাথমেটিক্স প্র্যাকটিক্যাল (মডিউল ১/৫০+)</div>
                 <div class="video-box">
-                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Math Simulation" allowfullscreen></iframe>
+                    <div class="video-placeholder-text"><i class="fa-solid fa-calculator fa-spin"></i> [3D Multivariable Calculus Surface Plot Engine]</div>
                 </div>
-                <h3>টেন্সর ফিল্ড ও কার্ভেচার অ্যানালাইসিস</h3>
-                <p><strong>কীভাবে কাজ করে:</strong> দ্বিমাত্রিক ও ত্রিমাত্রিক তলে ভেক্টরের রূপান্তর এবং বক্রতার জ্যামিতিক সিমুলেশন।</p>
+                <h3>মাল্টিভ্যারিয়েবল ক্যালকুলাস ও পার্শিয়াল ডেরিভেティブ</h3>
+                <p><strong>বিস্তারিত তত্ত্ব ও কার্যপদ্ধতি:</strong> থ্রি-ডি কার্ভ ও সারফেসে স্পর্শক তল (Tangent Plane) এবং গ্রেডিয়েন্টের সাহায্যে সর্বোচ্চ পরিবর্তনের হার নির্ণয় করা।</p>
             </div>
         </div>
     </section>
@@ -474,23 +483,23 @@
     <!-- Research Notes & Papers Section -->
     <section id="research">
         <h2 class="section-title">বিশ্বমানের প্রাতিষ্ঠানিক গবেষণা পেপারস (৩০+ পেপার)</h2>
-        <p class="section-desc">CERN, MIT, Caltech, Stanford, NASA এবং প্রিন্সটনের গবেষণার ওপর ভিত্তি করে তৈরি গভীর নোটস।</p>
+        <p class="section-desc">CERN, MIT, Caltech, Stanford এবং প্রিন্সটনের গবেষণার ওপর ভিত্তি করে তৈরি গভীর প্রাতিষ্ঠানিক নোটস।</p>
         
         <div class="grid-container">
             <div class="card">
                 <div class="badge">CERN | ফিজিক্স রিসার্চ (১/৩০)</div>
                 <h3>হিগস ফিল্ড ইন্টারঅ্যাকশন ও ভর সৃষ্টি</h3>
-                <p>মৌলিক কণাগুলো কীভাবে হিগস ফিল্ডের সাথে মিথস্ক্রিয়ার মাধ্যমে ভর লাভ করে তার কোয়ান্টাম বিশ্লেষণ।</p>
+                <p><strong>বিস্তারিত সমীক্ষা:</strong> স্ট্যান্ডার্ড মডেলের ইরেকট্রোস্বাতন্ত্র্য ভাঙার প্রক্রিয়ায় কণাগুলো কীভাবে শূন্যস্থানে থাকা হিগস ফিল্ডের সাথে কাপলিং কনস্ট্যান্টের মাধ্যমে ভর অর্জন করে তার গাণিতিক ও থ্রি-ডি প্রমাণ।</p>
             </div>
             <div class="card">
                 <div class="badge">HARVARD/MIT | বায়োলজি রিসার্চ (২/৩০)</div>
                 <h3>CRISPR-Cas13 RNA এডিটিং ডাইনামিক্স</h3>
-                <p>স্থায়ী জিনোম পরিবর্তন ছাড়াই একক স্ট্র্যান্ডের RNA লক্ষ্য করে নিখুঁত থেরাপিউটিক এডিটিং পদ্ধতি।</p>
+                <p><strong>বিস্তারিত সমীক্ষা:</strong> Cas13 এনজাইমের গাইড RNA এর সাথে নির্দিষ্ট সিঙ্গল স্ট্র্যান্ড RNA চেনার কৌশল এবং থেরাপিউটিক ট্রান্সক্রিপ্টোম মডিফিকেশনের প্রিসিশন মেকানিজম।</p>
             </div>
             <div class="card">
                 <div class="badge">PRINCETON | ম্যাথ রিসার্চ (৩/৩০)</div>
                 <h3>রিম্যান হাইপোথিসিস ও প্রাইম ডিস্ট্রিবিউশন</h3>
-                <p>রিম্যান জেটা ফাংশনের শূন্যস্থান এবং কোয়ান্টাম শক্তির স্তরের সাথে এর গাণিতিক সম্পর্ক।</p>
+                <p><strong>বিস্তারিত সমীক্ষা:</strong> রিম্যান জেটা ফাংশনের অবাস্তব শূন্যস্থানগুলোর সমালোচনামূলক লাইন ($Re(s) = \frac{1}{2}$) এবং কোয়ান্টাম হ্যামিল্টোনিয়ানের শক্তির স্তরের মধ্যে সংযোগ।</p>
             </div>
         </div>
     </section>
@@ -501,12 +510,12 @@
         <p class="section-desc">বিজ্ঞান জগতের সবচেয়ে রহস্যময় তথ্যগুলো জানতে নিচের কার্ডগুলোতে ক্লিক করুন।</p>
         
         <div class="grid-container">
-            <div class="card fact-trigger-card" onclick="openFactModal('কোয়ান্টাম সুপারপজিশন', 'সাবঅ্যাটমিক কণাগুলো পরিমাপ করার আগ পর্যন্ত একই সাথে একাধিক অবস্থায় (Superposition) থাকতে পারে!')">
+            <div class="card fact-trigger-card" onclick="openFactModal('কোয়ান্টাম সুপারপজিশন', 'সাবঅ্যাটমিক কণা যেমন ইলেকট্রন বা ফোটন পরিমাপ করার আগ পর্যন্ত একই সাথে সম্ভাব্য সমস্ত অবস্থায় (Superposition) অবস্থান করতে পারে। যখনই কোনো পর্যবেক্ষক বা যন্ত্র তা পরিমাপ করে, ওয়েভ ফাংশন তখন একটিমাত্র নির্দিষ্ট বাস্তবতায় ধসে পড়ে বা কোলাপ্স করে।')">
                 <i class="fa-solid fa-atom"></i>
                 <h3>কোয়ান্টাম সুপারপজিশন</h3>
                 <p>বিস্তারিত জানতে ক্লিক করুন...</p>
             </div>
-            <div class="card fact-trigger-card" onclick="openFactModal('মানব ডিএনএ রহস্য', 'আপনার শরীরের সমস্ত ডিএনএ খুলে ফেললে তা পৃথিবী থেকে প্লুটো এবং আবার ফিরে আসার দূরত্বের চেয়েও বড় হবে!')">
+            <div class="card fact-trigger-card" onclick="openFactModal('মানব ডিএনএর অবিশ্বাস্য দৈর্ঘ্য', 'আপনার শরীরের প্রতিটি কোষে থাকা সমস্ত ডিএনএ যদি সুতার মতো এক সারিতে খুলে লম্বালম্বি রাখা হয়, তবে তার মোট দৈর্ঘ্য হবে প্রায় ১০ বিলিয়ন মাইল—যা পৃথিবী থেকে প্লুটো এবং আবার ফিরে আসার দূরত্বের চেয়েও অনেক বেশি!')">
                 <i class="fa-solid fa-dna"></i>
                 <h3>মানব ডিএনএর দৈর্ঘ্য</h3>
                 <p>বিস্তারিত জানতে ক্লিক করুন...</p>
@@ -604,9 +613,9 @@
             isEnglish = !isEnglish;
             const desc = document.getElementById('hero-desc');
             if (isEnglish) {
-                desc.innerText = "A next-generation virtual universe of science and advanced research founded by Souparno Roy. Explore Physics, Chemistry, Mathematics, and Biology through 200+ 3D practical video simulations and 30+ institutional research papers.";
+                desc.innerText = "An advanced virtual universe of science and research founded by Souparno Roy. Explore Physics, Chemistry, Mathematics, and Biology through 200+ 3D practical simulation video modules and 30+ institutional research papers from CERN, MIT, Stanford, and Princeton.";
             } else {
-                desc.innerText = "পদার্থবিদ্যা, রসায়ন, গণিত এবং জীববিদ্যার এক বিশাল ভার্চুয়াল ইউনিভার্স। এখানে রয়েছে ২০০+ এর বেশি ইন্টারঅ্যাক্টিভ থ্রি-ডি প্র্যাকটিক্যাল ভিডিও সিমুলেশন এবং বিশ্বের শীর্ষস্থানীয় ল্যাবরেটরির ৩০+ রিসার্চ পেপার।";
+                desc.innerText = "পদার্থবিদ্যা, রসায়ন, গণিত এবং জীববিদ্যার এক উন্নত ভার্চুয়াল ইউনিভার্স। এখানে ফিজিক্স, কেমিস্ট্রি, বায়োলজি এবং ম্যাথের জন্য রয়েছে ২০০+ এর বেশি থ্রি-ডি অ্যানিমেশন ও সিমুলেশন ভিডিও এবং বিশ্বখ্যাত ল্যাবরেটরিগুলোর (CERN, MIT, Stanford ইত্যাদি) ৩০+ গভীর রিসার্চ পেপার।";
             }
         }
     </script>

@@ -14,12 +14,12 @@
 
     <style>
         :root {
-            --primary-color: #0f172a;
+            --primary-color: #070b19;
             --accent-color: #00f2fe;
             --secondary-accent: #4facfe;
             --text-color: #f8fafc;
-            --card-bg: rgba(30, 41, 59, 0.85);
-            --glow: 0 0 20px rgba(0, 242, 254, 0.4);
+            --card-bg: rgba(15, 23, 42, 0.9);
+            --glow: 0 0 25px rgba(0, 242, 254, 0.5);
         }
 
         * {
@@ -54,12 +54,12 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 8%;
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(7, 11, 25, 0.95);
+            backdrop-filter: blur(15px);
             position: sticky;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid rgba(0, 242, 254, 0.2);
+            border-bottom: 1px solid rgba(0, 242, 254, 0.3);
         }
 
         .logo {
@@ -70,7 +70,7 @@
             text-shadow: var(--glow);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         nav ul {
@@ -98,14 +98,14 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 120px 20px 80px 20px;
-            min-height: 85vh;
-            background: radial-gradient(circle, rgba(15, 23, 42, 0.6) 0%, rgba(15, 23, 42, 0.95) 100%);
+            padding: 140px 20px 90px 20px;
+            min-height: 90vh;
+            background: radial-gradient(circle, rgba(7, 11, 25, 0.4) 0%, rgba(7, 11, 25, 0.95) 100%);
         }
 
         .hero h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 3.8rem;
+            font-size: 4rem;
             margin-bottom: 15px;
             background: linear-gradient(to right, var(--accent-color), var(--secondary-accent));
             -webkit-background-clip: text;
@@ -115,18 +115,18 @@
         }
 
         .hero .subtitle {
-            font-size: 1.2rem;
-            color: #94a3b8;
+            font-size: 1.3rem;
+            color: #38bdf8;
             margin-bottom: 25px;
-            font-weight: 300;
+            font-weight: 500;
         }
 
         .hero p {
             font-size: 1.15rem;
-            max-width: 800px;
+            max-width: 850px;
             margin-bottom: 40px;
             color: #cbd5e1;
-            line-height: 1.7;
+            line-height: 1.8;
         }
 
         .cta-buttons {
@@ -137,7 +137,7 @@
         }
 
         .btn {
-            padding: 12px 30px;
+            padding: 14px 32px;
             border-radius: 30px;
             font-weight: 600;
             text-decoration: none;
@@ -146,7 +146,7 @@
             border: none;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
 
         .btn-primary {
@@ -156,8 +156,8 @@
         }
 
         .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 0 30px rgba(0, 242, 254, 0.8);
+            transform: translateY(-4px);
+            box-shadow: 0 0 35px rgba(0, 242, 254, 0.9);
         }
 
         .btn-secondary {
@@ -173,14 +173,14 @@
 
         /* General Section Styling */
         section {
-            padding: 80px 8%;
+            padding: 90px 8%;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .section-title {
             text-align: center;
             font-family: 'Orbitron', sans-serif;
-            font-size: 2.5rem;
+            font-size: 2.6rem;
             margin-bottom: 15px;
             color: var(--accent-color);
             text-shadow: var(--glow);
@@ -189,149 +189,112 @@
         .section-desc {
             text-align: center;
             color: #cbd5e1;
-            max-width: 700px;
+            max-width: 750px;
             margin: 0 auto 50px auto;
-            font-size: 1.05rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
         }
 
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
         }
 
         /* Cards */
         .card {
             background: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 30px;
-            backdrop-filter: blur(10px);
-            transition: 0.3s;
+            border: 1px solid rgba(0, 242, 254, 0.2);
+            border-radius: 16px;
+            padding: 35px;
+            backdrop-filter: blur(12px);
+            transition: 0.4s;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
 
         .card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-10px);
             border-color: var(--accent-color);
             box-shadow: var(--glow);
         }
 
         .card i {
-            font-size: 2.8rem;
+            font-size: 3rem;
             color: var(--accent-color);
             margin-bottom: 20px;
         }
 
         .card h3 {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             margin-bottom: 15px;
             color: #fff;
         }
 
         .card p {
             color: #94a3b8;
-            font-size: 0.95rem;
-            line-height: 1.6;
+            font-size: 0.98rem;
+            line-height: 1.7;
             margin-bottom: 20px;
         }
 
         .badge {
             background: rgba(0, 242, 254, 0.15);
             color: var(--accent-color);
-            padding: 5px 12px;
+            padding: 6px 14px;
             border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 600;
             width: fit-content;
             margin-bottom: 15px;
-            border: 1px solid rgba(0, 242, 254, 0.3);
+            border: 1px solid rgba(0, 242, 254, 0.4);
         }
 
-        /* Solved Examples Accordion / Expandable Cards */
+        /* Solved Examples Box */
         .example-box {
             background: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
+            border: 1px solid rgba(0, 242, 254, 0.3);
+            border-radius: 14px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
         }
 
         .example-box h4 {
             color: var(--accent-color);
-            font-size: 1.2rem;
-            margin-bottom: 10px;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            font-family: 'Orbitron', sans-serif;
         }
 
         .example-box .formula {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 10px;
-            border-radius: 6px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 12px 18px;
+            border-radius: 8px;
             font-family: monospace;
-            color: #4facfe;
-            margin: 10px 0;
+            color: #38bdf8;
+            margin: 15px 0;
             display: inline-block;
-        }
-
-        /* 3D Simulation Container Preview */
-        .simulation-preview {
-            width: 100%;
-            height: 180px;
-            background: #020617;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 15px;
-            border: 1px dashed var(--accent-color);
-            color: #64748b;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        /* Stats Counter */
-        .highlights {
-            background: rgba(15, 23, 42, 0.8);
-            text-align: center;
-        }
-
-        .stats-box {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .stat-item h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3rem;
-            color: var(--accent-color);
-            margin-bottom: 10px;
-        }
-
-        .stat-item p {
-            font-size: 1.1rem;
-            color: #cbd5e1;
+            border-left: 4px solid var(--accent-color);
         }
 
         /* Footer */
         footer {
             text-align: center;
-            padding: 40px 20px;
-            background: rgba(10, 15, 30, 0.95);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 50px 20px;
+            background: rgba(4, 7, 16, 0.98);
+            border-top: 1px solid rgba(0, 242, 254, 0.2);
             color: #94a3b8;
         }
 
         footer h3 {
             color: #fff;
             margin-bottom: 10px;
+            font-family: 'Orbitron', sans-serif;
         }
 
         footer .founder {
@@ -341,7 +304,7 @@
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
+            .hero h1 { font-size: 2.6rem; }
             nav ul { display: none; }
             section { padding: 60px 5%; }
         }
@@ -355,7 +318,7 @@
     <!-- Header / Navbar -->
     <header>
         <div class="logo">
-            <i class="fa-solid fa-atom"></i> RISHI SCINIVERSE
+            <i class="fa-solid fa-atom fa-spin"></i> RISHI SCINIVERSE
         </div>
         <nav>
             <ul>
@@ -373,130 +336,130 @@
     <section class="hero" id="home">
         <h1>RISHI SCINIVERSE</h1>
         <div class="subtitle">Founded & Developed by <strong>Souparno Roy</strong></div>
-        <p>Welcome to the ultimate digital universe for Science, Research, and Interactive Learning. Explore Physics, Chemistry, Mathematics, and Biology with 50+ interactive 3D simulations, real-world practical explanations, and solved research equations.</p>
+        <p>Enter the next-generation virtual universe of science and advanced research. Explore Physics, Chemistry, Mathematics, and Biology through immersive 3D simulations, rigorous mathematical proofs, and breakthrough institutional research papers.</p>
         <div class="cta-buttons">
             <a href="#practicals" class="btn btn-primary"><i class="fa-solid fa-cube"></i> Explore 3D Practicals</a>
-            <a href="#examples" class="btn btn-secondary"><i class="fa-solid fa-square-root-variable"></i> View Solved Examples</a>
+            <a href="#research" class="btn btn-secondary"><i class="fa-solid fa-flask-vial"></i> View Research Papers</a>
         </div>
     </section>
 
     <!-- Subjects Section -->
     <section id="subjects">
         <h2 class="section-title">Core Disciplines</h2>
-        <p class="section-desc">Comprehensive scientific research, formulas, and concepts broken down with step-by-step logic.</p>
+        <p class="section-desc">Comprehensive scientific research frameworks and foundational equations explained with logical precision.</p>
         
         <div class="grid-container">
             <div class="card">
                 <div>
                     <i class="fa-solid fa-bolt"></i>
                     <h3>Physics</h3>
-                    <p>Deep dive into Quantum Mechanics, Relativity, Electromagnetism, and Classical Dynamics with interactive 3D motion models.</p>
+                    <p>Advanced study of Quantum Mechanics, General Relativity, Electrodynamics, and Non-linear Dynamics with interactive models.</p>
                 </div>
-                <a href="#practicals" class="btn btn-secondary">Learn Physics</a>
+                <a href="#practicals" class="btn btn-secondary">Explore Physics</a>
             </div>
             <div class="card">
                 <div>
                     <i class="fa-solid fa-flask"></i>
                     <h3>Chemistry</h3>
-                    <p>Explore 3D Molecular Structures, Chemical Reaction Kinetics, Organic Syntheses, and Atomic Bonding Mechanics.</p>
+                    <p>Molecular Orbital Theory, Thermodynamic Kinetics, Organic Synthesis Pathways, and Coordination Chemistry dynamics.</p>
                 </div>
-                <a href="#practicals" class="btn btn-secondary">Learn Chemistry</a>
+                <a href="#practicals" class="btn btn-secondary">Explore Chemistry</a>
             </div>
             <div class="card">
                 <div>
                     <i class="fa-solid fa-calculator"></i>
                     <h3>Mathematics</h3>
-                    <p>Calculus, 3D Vector Geometry, Differential Equations, and Logical Algorithmic Proofs with visual graphs.</p>
+                    <p>Multivariable Calculus, Tensor Analysis, Differential Geometry, and Abstract Algebraic Proof systems.</p>
                 </div>
-                <a href="#examples" class="btn btn-secondary">Learn Math</a>
+                <a href="#examples" class="btn btn-secondary">Explore Mathematics</a>
             </div>
             <div class="card">
                 <div>
                     <i class="fa-solid fa-dna"></i>
                     <h3>Biology</h3>
-                    <p>Cellular Machinery, DNA Double Helix Replication, Neurobiology, and Human Anatomy visualizer.</p>
+                    <p>Molecular Genetics, Neurotransmitter Signaling Pathways, Epigenetic Regulation, and Cellular Machinery.</p>
                 </div>
-                <a href="#practicals" class="btn btn-secondary">Learn Biology</a>
+                <a href="#practicals" class="btn btn-secondary">Explore Biology</a>
             </div>
         </div>
     </section>
 
-    <!-- 50+ 3D Practicals Section -->
+    <!-- 3D Practicals Section -->
     <section id="practicals">
-        <h2 class="section-title">50+ Interactive 3D Practicals</h2>
-        <p class="section-desc">Understand <strong>WHY</strong> and <strong>HOW</strong> physical laws work through active 3D visualization and simulation mechanics.</p>
+        <h2 class="section-title">Interactive 3D Practicals & Mechanisms</h2>
+        <p class="section-desc">Understand <strong>WHY</strong> and <strong>HOW</strong> physical and chemical phenomena occur through detailed step-by-step logic.</p>
         
         <div class="grid-container">
             <div class="card">
                 <div class="badge">PHYSICS 3D PRACTICAL</div>
-                <div class="simulation-preview">
-                    <i class="fa-solid fa-arrows-spin fa-2x" style="color: var(--accent-color);"></i>
-                    <span>Simple Pendulum & Harmonic Motion</span>
-                </div>
-                <h3>Simple Harmonic Motion (SHM)</h3>
-                <p><strong>Why it happens:</strong> Restoring force is directly proportional to displacement ($F = -kx$). Explains time period ($T = 2\pi\sqrt{L/g}$) in a gravitational field.</p>
+                <h3>Simple Harmonic Motion & Damping</h3>
+                <p><strong>Why & How it happens:</strong> When a system is displaced from equilibrium, a restoring force proportional to displacement ($F = -kx$) pulls it back. In real-world environments, damping forces (proportional to velocity) gradually dissipate energy into heat, causing amplitude decay.</p>
             </div>
 
             <div class="card">
                 <div class="badge">CHEMISTRY 3D PRACTICAL</div>
-                <div class="simulation-preview">
-                    <i class="fa-solid fa-cubes-stacked fa-2x" style="color: var(--accent-color);"></i>
-                    <span>3D Molecular Geometry (H₂O / CH₄)</span>
-                </div>
-                <h3>VSEPR Theory & Bond Angles</h3>
-                <p><strong>Why it happens:</strong> Electron pairs around a central atom repel each other, forcing molecules into 3D shapes like Tetrahedral ($109.5^\circ$) or Bent ($104.5^\circ$).</p>
+                <h3>VSEPR Molecular Geometry</h3>
+                <p><strong>Why & How it happens:</strong> Valence Shell Electron Pair Repulsion theory dictates that electron pairs surrounding a central metallic or non-metallic atom position themselves as far apart as possible to minimize electrostatic repulsion, giving rise to unique spatial configurations like tetrahedral or octahedral shapes.</p>
             </div>
 
             <div class="card">
                 <div class="badge">BIOLOGY 3D PRACTICAL</div>
-                <div class="simulation-preview">
-                    <i class="fa-solid fa-dna fa-2x" style="color: var(--accent-color);"></i>
-                    <span>DNA Helix Interactive Model</span>
-                </div>
-                <h3>DNA Replication Mechanism</h3>
-                <p><strong>Why it happens:</strong> Helicase unzips hydrogen bonds between Nitrogenous bases (A-T, G-C), enabling Polymerase to synthesize complementary strands.</p>
+                <h3>DNA Replication & Enzymatic Action</h3>
+                <p><strong>Why & How it happens:</strong> DNA Helicase breaks hydrogen bonds holding nucleotide base pairs together (Adenine-Thymine, Guanine-Cytosine). DNA Polymerase then reads the template strand to synthesize leading and lagging strands, ensuring genetic fidelity.</p>
             </div>
         </div>
     </section>
 
     <!-- Solved Examples Section -->
     <section id="examples">
-        <h2 class="section-title">Solved Research Examples</h2>
-        <p class="section-desc">Step-by-step mathematical & scientific problem solving with real-world applications.</p>
+        <h2 class="section-title">Advanced Solved Research Examples</h2>
+        <p class="section-desc">Step-by-step mathematical problem solving with real-world applications across disciplines.</p>
 
         <div class="example-box">
-            <h4><i class="fa-solid fa-check-circle"></i> Example 1: Einstein's Mass-Energy Equivalence (Physics)</h4>
-            <p><strong>Problem:</strong> Calculate the energy released when $1\text{ gram}$ ($0.001\text{ kg}$) of matter is completely converted into energy.</p>
-            <div class="formula">Formula: E = m × c²  |  c = 3 × 10⁸ m/s</div>
-            <p><strong>Solution Steps:</strong><br>
-            $E = 0.001 \text{ kg} \times (3 \times 10^8 \text{ m/s})^2$<br>
-            $E = 0.001 \times 9 \times 10^{16} \text{ Joules}$<br>
-            <strong>Result:</strong> $E = 9 \times 10^{13} \text{ Joules}$ (Equivalent to powering thousands of homes for an entire year).</p>
+            <h4><i class="fa-solid fa-check-circle"></i> 1. Relativistic Kinetic Energy (Physics)</h4>
+            <p><strong>Problem:</strong> Calculate the relativistic kinetic energy of an electron moving at $0.8c$ (where $c = 3 \times 10^8 \text{ m/s}$, rest mass $m_0 = 9.11 \times 10^{-31} \text{ kg}$).</p>
+            <div class="formula">Formula: $K = (\gamma - 1) m_0 c^2$ where $\gamma = 1 / \sqrt{1 - v^2/c^2}$</div>
+            <p><strong>Detailed Solution:</strong><br>
+            1. Lorentz Factor ($\gamma$): $1 / \sqrt{1 - (0.8)^2} = 1 / \sqrt{0.36} = 1 / 0.6 = 1.667$<br>
+            2. Rest Energy ($m_0 c^2$): $8.2 \times 10^{-14} \text{ Joules}$<br>
+            <strong>Result:</strong> $K = (1.667 - 1) \times 8.2 \times 10^{-14} = 5.47 \times 10^{-14} \text{ Joules}$.</p>
         </div>
 
         <div class="example-box">
-            <h4><i class="fa-solid fa-check-circle"></i> Example 2: Schrödinger Wave Equation Application (Quantum Mechanics)</h4>
-            <p><strong>Problem:</strong> Determine the probability density of finding a particle in a 1D Infinite Potential Box.</p>
-            <div class="formula">Formula: Ψ_n(x) = √(2/L) × sin(nπx / L)</div>
-            <p><strong>Explanation:</strong> Particles at quantum scales behave as probability waves. Node points occur where the wavefunction $\Psi = 0$, meaning zero probability of particle existence at those exact coordinates.</p>
+            <h4><i class="fa-solid fa-check-circle"></i> 2. Rate of Chemical Reaction (Chemistry)</h4>
+            <p><strong>Problem:</strong> For the reaction $2N_2O_5 \rightarrow 4NO_2 + O_2$, if the disappearance rate of $N_2O_5$ is $4.2 \times 10^{-4} \text{ M/s}$, find the rate of formation of $NO_2$.</p>
+            <div class="formula">Formula: $\text{Rate} = -\frac{1}{2}\frac{\Delta[N_2O_5]}{\Delta t} = +\frac{1}{4}\frac{\Delta[NO_2]}{\Delta t}$</div>
+            <p><strong>Detailed Solution:</strong><br>
+            $\frac{\Delta[NO_2]}{\Delta t} = 2 \times (-\frac{\Delta[N_2O_5]}{\Delta t})$<br>
+            $= 2 \times 4.2 \times 10^{-4} = 8.4 \times 10^{-4} \text{ M/s}$.</p>
         </div>
     </section>
 
-    <!-- Research Notes Section -->
+    <!-- Research Notes & Papers Section -->
     <section id="research">
-        <h2 class="section-title">Research Notes & Papers</h2>
-        <p class="section-desc">Summary of breakthrough discoveries, unknown scientific phenomena, and theoretical notes.</p>
+        <h2 class="section-title">Institutional Research Notes & Papers</h2>
+        <p class="section-desc">Exploratory reviews inspired by breakthroughs from global research institutions (CERN, MIT, Caltech, Stanford).</p>
         
         <div class="grid-container">
             <div class="card">
-                <div class="badge">RESEARCH NOTE #01</div>
-                <h3>Dark Matter & WIMPs Hypothesis</h3>
-                <p>Galaxies rotate at speeds that should cause them to fly apart based on visible mass alone. This note explores Weakly Interacting Massive Particles (WIMPs) as candidates for Dark Matter.</p>
+                <div class="badge">PHYSICS RESEARCH | CERN INSPIRED</div>
+                <h3>Higgs Field Interaction & Mass Generation</h3>
+                <p>Detailed notes on how elementary particles acquire mass through their interaction with the pervasive Higgs field, verified via symmetry-breaking mechanisms in particle accelerators.</p>
             </div>
             <div class="card">
-                <div class="badge">RESEARCH NOTE #02</div>
-                <h3>CRISPR-Cas9 Gene Editing Logic</h3>
-                <p>A detailed breakdown of bacterial immune defense adapted for precise genome editing, double-strand DNA breaks, and homology-directed repair mechanism.</p>
+                <div class="badge">BIOLOGY RESEARCH | HARVARD/MIT</div>
+                <h3>CRISPR-Cas13 RNA Editing Dynamics</h3>
+                <p>Investigation into Cas13 enzymes targeting single-stranded RNA with high precision, opening doors to reversible transcriptomic therapies without permanent genomic alterations.</p>
+            </div>
+            <div class="card">
+                <div class="badge">MATHEMATICS RESEARCH | PRINCETON</div>
+                <h3>Riemann Hypothesis & Prime Distribution</h3>
+                <p>Exploratory proofs on the non-trivial zeros of the Riemann zeta function and their profound correlation with quantum mechanical energy levels.</p>
+            </div>
+            <div class="card">
+                <div class="badge">CHEMISTRY RESEARCH | CALTECH</div>
+                <h3>Artificial Photosynthesis Catalysts</h3>
+                <p>Transition metal oxide nano-catalysts used for direct solar-driven water splitting, providing high-efficiency hydrogen fuel generation pathways.</p>
             </div>
         </div>
     </section>
@@ -506,33 +469,14 @@
         <h2 class="section-title">Mind-Blowing Scientific Facts</h2>
         <div class="grid-container">
             <div class="card">
-                <i class="fa-solid fa-brain"></i>
-                <h3>Quantum Entanglement</h3>
-                <p>Entangled particles instantly affect each other regardless of distance—even across light-years. Einstein called this "Spooky Action at a Distance."</p>
+                <i class="fa-solid fa-atom"></i>
+                <h3>Quantum Superposition</h3>
+                <p>Subatomic particles like electrons can exist in multiple states simultaneously until an act of measurement forces them to collapse into a definite eigenstate.</p>
             </div>
             <div class="card">
-                <i class="fa-solid fa-temperature-arrow-down"></i>
-                <h3>Absolute Zero Mechanics</h3>
-                <p>At $-273.15^\circ\text{C}$ ($0\text{ Kelvin}$), atomic movement completely stops, causing matter to enter a 5th state: Bose-Einstein Condensate.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Stats Counter Section -->
-    <section class="highlights">
-        <h2 class="section-title">Platform Overview</h2>
-        <div class="stats-box">
-            <div class="stat-item">
-                <h2>50+</h2>
-                <p>3D Practical Models</p>
-            </div>
-            <div class="stat-item">
-                <h2>50+</h2>
-                <p>Research Notes & Papers</p>
-            </div>
-            <div class="stat-item">
-                <h2>100%</h2>
-                <p>Solved Practical Examples</p>
+                <i class="fa-solid fa-dna"></i>
+                <h3>Human Genetic Code</h3>
+                <p>If you uncoiled all the DNA molecules in your body, they would stretch over 10 billion miles—from Earth to Pluto and back multiple times!</p>
             </div>
         </div>
     </section>
@@ -544,33 +488,32 @@
         <p style="margin-top: 15px; font-size: 0.85rem; color: #64748b;">&copy; 2026 RISHI SCINIVERSE. All Rights Reserved. Empowering Scientific Curiosity Worldwide.</p>
     </footer>
 
-    <!-- Three.js Interactive Particle System Script -->
+    <!-- Three.js Interactive Particle Simulation Script -->
     <script>
-        // Interactive 3D Background with Three.js
         const container = document.getElementById('canvas-container');
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ alpha: true });
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
 
         renderer.setSize(window.innerWidth, window.innerHeight);
         container.appendChild(renderer.domElement);
 
-        // Particle Geometry (Scientific Cosmos Theme)
+        // Particle Mesh
         const geometry = new THREE.BufferGeometry();
-        const count = 700;
+        const count = 1000;
         const positions = new Float32Array(count * 3);
 
         for (let i = 0; i < count * 3; i++) {
-            positions[i] = (Math.random() - 0.5) * 15;
+            positions[i] = (Math.random() - 0.5) * 20;
         }
 
         geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
         const material = new THREE.PointsMaterial({
-            size: 0.03,
+            size: 0.04,
             color: 0x00f2fe,
             transparent: true,
-            opacity: 0.7
+            opacity: 0.8
         });
 
         const particles = new THREE.Points(geometry, material);
@@ -588,18 +531,18 @@
 
         function animate() {
             requestAnimationFrame(animate);
-            particles.rotation.y += 0.001;
-            particles.rotation.x += 0.0005;
+            particles.rotation.y += 0.0015;
+            particles.rotation.x += 0.0008;
 
-            camera.position.x += (mouseX * 0.5 - camera.position.x) * 0.05;
-            camera.position.y += (-mouseY * 0.5 - camera.position.y) * 0.05;
+            camera.position.x += (mouseX * 0.8 - camera.position.x) * 0.05;
+            camera.position.y += (-mouseY * 0.8 - camera.position.y) * 0.05;
 
             renderer.render(scene, camera);
         }
 
         animate();
 
-        // Responsive Resize
+        // Responsive Resize Handler
         window.addEventListener('resize', () => {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();

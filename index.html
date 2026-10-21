@@ -1,21 +1,24 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RISHI SCINIVERSE - মহাবিশ্বের বিজ্ঞান ও গবেষণা</title>
+    <title>RISHI SCINIVERSE - Founded by Souparno Roy</title>
+    
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome for Icons -->
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <!-- Three.js Library for 3D Simulation Background -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
     <style>
         :root {
             --primary-color: #0f172a;
             --accent-color: #00f2fe;
             --secondary-accent: #4facfe;
             --text-color: #f8fafc;
-            --card-bg: rgba(30, 41, 59, 0.7);
+            --card-bg: rgba(30, 41, 59, 0.85);
             --glow: 0 0 20px rgba(0, 242, 254, 0.4);
         }
 
@@ -24,6 +27,7 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
         }
 
         body {
@@ -33,24 +37,15 @@
             position: relative;
         }
 
-        /* Scientific Background Watermark / Formulas Theme */
-        body::before {
-            content: "E=mc²  F=ma  H₂O  π  ∫dx  DNA  ΔG=ΔH-TΔS  v=u+at  a²+b²=c²  E=hf";
+        /* 3D Canvas Background */
+        #canvas-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;
-            color: rgba(255, 255, 255, 0.03);
             z-index: -1;
-            display: flex;
-            flex-wrap: wrap;
-            align-content: space-around;
-            justify-content: space-around;
             pointer-events: none;
-            line-height: 3;
         }
 
         /* Header & Navigation */
@@ -59,12 +54,12 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 8%;
-            background: rgba(15, 23, 42, 0.9);
+            background: rgba(15, 23, 42, 0.95);
             backdrop-filter: blur(10px);
             position: sticky;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(0, 242, 254, 0.2);
         }
 
         .logo {
@@ -81,7 +76,7 @@
         nav ul {
             display: flex;
             list-style: none;
-            gap: 30px;
+            gap: 25px;
         }
 
         nav ul li a {
@@ -103,15 +98,15 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 100px 20px;
-            min-height: 80vh;
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(30, 41, 59, 0.8));
+            padding: 120px 20px 80px 20px;
+            min-height: 85vh;
+            background: radial-gradient(circle, rgba(15, 23, 42, 0.6) 0%, rgba(15, 23, 42, 0.95) 100%);
         }
 
         .hero h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 3.5rem;
-            margin-bottom: 20px;
+            font-size: 3.8rem;
+            margin-bottom: 15px;
             background: linear-gradient(to right, var(--accent-color), var(--secondary-accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -119,16 +114,26 @@
             letter-spacing: 2px;
         }
 
-        .hero p {
+        .hero .subtitle {
             font-size: 1.2rem;
-            max-width: 700px;
+            color: #94a3b8;
+            margin-bottom: 25px;
+            font-weight: 300;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            max-width: 800px;
             margin-bottom: 40px;
             color: #cbd5e1;
+            line-height: 1.7;
         }
 
         .cta-buttons {
             display: flex;
             gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         .btn {
@@ -139,6 +144,9 @@
             transition: 0.3s;
             cursor: pointer;
             border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .btn-primary {
@@ -163,61 +171,132 @@
             color: var(--primary-color);
         }
 
-        /* Features / Categories Section */
-        .features {
+        /* General Section Styling */
+        section {
             padding: 80px 8%;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .section-title {
             text-align: center;
             font-family: 'Orbitron', sans-serif;
             font-size: 2.5rem;
-            margin-bottom: 50px;
+            margin-bottom: 15px;
             color: var(--accent-color);
+            text-shadow: var(--glow);
+        }
+
+        .section-desc {
+            text-align: center;
+            color: #cbd5e1;
+            max-width: 700px;
+            margin: 0 auto 50px auto;
+            font-size: 1.05rem;
         }
 
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
         }
 
+        /* Cards */
         .card {
             background: var(--card-bg);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 15px;
             padding: 30px;
-            text-align: center;
             backdrop-filter: blur(10px);
             transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-8px);
             border-color: var(--accent-color);
             box-shadow: var(--glow);
         }
 
         .card i {
-            font-size: 3rem;
+            font-size: 2.8rem;
             color: var(--accent-color);
             margin-bottom: 20px;
         }
 
         .card h3 {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             margin-bottom: 15px;
+            color: #fff;
         }
 
         .card p {
             color: #94a3b8;
             font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
         }
 
-        /* Highlights Section (50+ 3D Practical & Research) */
+        .badge {
+            background: rgba(0, 242, 254, 0.15);
+            color: var(--accent-color);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            width: fit-content;
+            margin-bottom: 15px;
+            border: 1px solid rgba(0, 242, 254, 0.3);
+        }
+
+        /* Solved Examples Accordion / Expandable Cards */
+        .example-box {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .example-box h4 {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .example-box .formula {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 10px;
+            border-radius: 6px;
+            font-family: monospace;
+            color: #4facfe;
+            margin: 10px 0;
+            display: inline-block;
+        }
+
+        /* 3D Simulation Container Preview */
+        .simulation-preview {
+            width: 100%;
+            height: 180px;
+            background: #020617;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            border: 1px dashed var(--accent-color);
+            color: #64748b;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* Stats Counter */
         .highlights {
-            padding: 60px 8%;
-            background: rgba(15, 23, 42, 0.5);
+            background: rgba(15, 23, 42, 0.8);
             text-align: center;
         }
 
@@ -244,24 +323,34 @@
         /* Footer */
         footer {
             text-align: center;
-            padding: 30px;
-            background: rgba(10, 15, 30, 0.9);
+            padding: 40px 20px;
+            background: rgba(10, 15, 30, 0.95);
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             color: #94a3b8;
         }
 
-        /* Responsive Design */
+        footer h3 {
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        footer .founder {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        /* Mobile Responsive */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.3rem;
-            }
-            nav ul {
-                display: none;
-            }
+            .hero h1 { font-size: 2.5rem; }
+            nav ul { display: none; }
+            section { padding: 60px 5%; }
         }
     </style>
 </head>
 <body>
+
+    <!-- 3D Interactive Background -->
+    <div id="canvas-container"></div>
 
     <!-- Header / Navbar -->
     <header>
@@ -270,77 +359,252 @@
         </div>
         <nav>
             <ul>
-                <li><a href="#">হোম</a></li>
-                <li><a href="#subjects">বিষয়সমূহ</a></li>
-                <li><a href="#practical">৩ডি প্র্যাকটিক্যালস</a></li>
-                <li><a href="#research">রিসার্চ ও নোটস</a></li>
-                <li><a href="#facts">বিজ্ঞান ফ্যাক্টস</a></li>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#subjects">Subjects</a></li>
+                <li><a href="#practicals">3D Practicals</a></li>
+                <li><a href="#examples">Solved Examples</a></li>
+                <li><a href="#research">Research Notes</a></li>
+                <li><a href="#facts">Science Facts</a></li>
             </ul>
         </nav>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="home">
         <h1>RISHI SCINIVERSE</h1>
-        <p>বিজ্ঞানপ্রেমী ও গবেষকদের জন্য এক অনন্য মহাবিশ্ব। ফিজিক্স, কেমিস্ট্রি, ম্যাথ ও বায়োলজির গুরুত্বপূর্ণ রিসার্চ নোটস, ৫০+ থ্রিডি প্র্যাকটিক্যালস এবং অজানা বিজ্ঞানের অনন্য সমাহার।</p>
+        <div class="subtitle">Founded & Developed by <strong>Souparno Roy</strong></div>
+        <p>Welcome to the ultimate digital universe for Science, Research, and Interactive Learning. Explore Physics, Chemistry, Mathematics, and Biology with 50+ interactive 3D simulations, real-world practical explanations, and solved research equations.</p>
         <div class="cta-buttons">
-            <a href="#practical" class="btn btn-primary">৩ডি প্র্যাকটিক্যালস দেখুন</a>
-            <a href="#research" class="btn btn-secondary">রিসার্চ নোটস</a>
+            <a href="#practicals" class="btn btn-primary"><i class="fa-solid fa-cube"></i> Explore 3D Practicals</a>
+            <a href="#examples" class="btn btn-secondary"><i class="fa-solid fa-square-root-variable"></i> View Solved Examples</a>
         </div>
     </section>
 
     <!-- Subjects Section -->
-    <section class="features" id="subjects">
-        <h2 class="section-title">বিজ্ঞান শাখা সমূহ</h2>
+    <section id="subjects">
+        <h2 class="section-title">Core Disciplines</h2>
+        <p class="section-desc">Comprehensive scientific research, formulas, and concepts broken down with step-by-step logic.</p>
+        
         <div class="grid-container">
             <div class="card">
-                <i class="fa-solid fa-bolt"></i>
-                <h3>পদার্থবিদ্যা (Physics)</h3>
-                <p>কোয়ান্টাম মেকানিক্স, আপেক্ষিকতা তত্ত্ব এবং আধুনিক ফিজিক্সের জটিল সূত্রের সহজ সমাধান ও ভিজ্যুয়াল নোটস।</p>
+                <div>
+                    <i class="fa-solid fa-bolt"></i>
+                    <h3>Physics</h3>
+                    <p>Deep dive into Quantum Mechanics, Relativity, Electromagnetism, and Classical Dynamics with interactive 3D motion models.</p>
+                </div>
+                <a href="#practicals" class="btn btn-secondary">Learn Physics</a>
             </div>
             <div class="card">
-                <i class="fa-solid fa-flask"></i>
-                <h3>রসায়ন (Chemistry)</h3>
-                <p>জৈব রসায়ন, আণবিক গঠন এবং রাসায়নিক বিক্রিয়ার গভীরে থাকা নানা অজানা রহস্য ও সমীকরণ।</p>
+                <div>
+                    <i class="fa-solid fa-flask"></i>
+                    <h3>Chemistry</h3>
+                    <p>Explore 3D Molecular Structures, Chemical Reaction Kinetics, Organic Syntheses, and Atomic Bonding Mechanics.</p>
+                </div>
+                <a href="#practicals" class="btn btn-secondary">Learn Chemistry</a>
             </div>
             <div class="card">
-                <i class="fa-solid fa-square-root-variable"></i>
-                <h3>গণিত (Mathematics)</h3>
-                <p>উচ্চতর গণিত, ক্যালকুলাস এবং জটিল সমীকরণের সলভড এক্সাম্পল ও লজিক্যাল থিঙ্কিং।</p>
+                <div>
+                    <i class="fa-solid fa-calculator"></i>
+                    <h3>Mathematics</h3>
+                    <p>Calculus, 3D Vector Geometry, Differential Equations, and Logical Algorithmic Proofs with visual graphs.</p>
+                </div>
+                <a href="#examples" class="btn btn-secondary">Learn Math</a>
             </div>
             <div class="card">
-                <i class="fa-solid fa-dna"></i>
-                <h3>জীববিদ্যা (Biology)</h3>
-                <p>জেনেটিক্স, হিউম্যান অ্যানাটমি এবং সেল বায়োলজির আধুনিক রিসার্চ ভিত্তিক গবেষণাপত্র।</p>
+                <div>
+                    <i class="fa-solid fa-dna"></i>
+                    <h3>Biology</h3>
+                    <p>Cellular Machinery, DNA Double Helix Replication, Neurobiology, and Human Anatomy visualizer.</p>
+                </div>
+                <a href="#practicals" class="btn btn-secondary">Learn Biology</a>
             </div>
         </div>
     </section>
 
-    <!-- Highlights Section (50+ 3D Practicals & Research) -->
-    <section class="highlights" id="practical">
-        <h2 class="section-title">আমাদের বিশেষ আকর্ষণ</h2>
-        <p style="color: #cbd5e1; max-width: 800px; margin: 0 auto;">এখানে প্রতিটি সূত্রের পেছনে কাজ করা মূল তত্ত্ব, তার ব্যবহারিক অর্থ এবং লাইভ ভিজ্যুয়ালাইজেশন বোঝানো হয়েছে। কেন এবং কীভাবে সূত্রগুলো কাজ করে তার সম্পূর্ণ ব্যাখ্যা।</p>
+    <!-- 50+ 3D Practicals Section -->
+    <section id="practicals">
+        <h2 class="section-title">50+ Interactive 3D Practicals</h2>
+        <p class="section-desc">Understand <strong>WHY</strong> and <strong>HOW</strong> physical laws work through active 3D visualization and simulation mechanics.</p>
         
+        <div class="grid-container">
+            <div class="card">
+                <div class="badge">PHYSICS 3D PRACTICAL</div>
+                <div class="simulation-preview">
+                    <i class="fa-solid fa-arrows-spin fa-2x" style="color: var(--accent-color);"></i>
+                    <span>Simple Pendulum & Harmonic Motion</span>
+                </div>
+                <h3>Simple Harmonic Motion (SHM)</h3>
+                <p><strong>Why it happens:</strong> Restoring force is directly proportional to displacement ($F = -kx$). Explains time period ($T = 2\pi\sqrt{L/g}$) in a gravitational field.</p>
+            </div>
+
+            <div class="card">
+                <div class="badge">CHEMISTRY 3D PRACTICAL</div>
+                <div class="simulation-preview">
+                    <i class="fa-solid fa-cubes-stacked fa-2x" style="color: var(--accent-color);"></i>
+                    <span>3D Molecular Geometry (H₂O / CH₄)</span>
+                </div>
+                <h3>VSEPR Theory & Bond Angles</h3>
+                <p><strong>Why it happens:</strong> Electron pairs around a central atom repel each other, forcing molecules into 3D shapes like Tetrahedral ($109.5^\circ$) or Bent ($104.5^\circ$).</p>
+            </div>
+
+            <div class="card">
+                <div class="badge">BIOLOGY 3D PRACTICAL</div>
+                <div class="simulation-preview">
+                    <i class="fa-solid fa-dna fa-2x" style="color: var(--accent-color);"></i>
+                    <span>DNA Helix Interactive Model</span>
+                </div>
+                <h3>DNA Replication Mechanism</h3>
+                <p><strong>Why it happens:</strong> Helicase unzips hydrogen bonds between Nitrogenous bases (A-T, G-C), enabling Polymerase to synthesize complementary strands.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solved Examples Section -->
+    <section id="examples">
+        <h2 class="section-title">Solved Research Examples</h2>
+        <p class="section-desc">Step-by-step mathematical & scientific problem solving with real-world applications.</p>
+
+        <div class="example-box">
+            <h4><i class="fa-solid fa-check-circle"></i> Example 1: Einstein's Mass-Energy Equivalence (Physics)</h4>
+            <p><strong>Problem:</strong> Calculate the energy released when $1\text{ gram}$ ($0.001\text{ kg}$) of matter is completely converted into energy.</p>
+            <div class="formula">Formula: E = m × c²  |  c = 3 × 10⁸ m/s</div>
+            <p><strong>Solution Steps:</strong><br>
+            $E = 0.001 \text{ kg} \times (3 \times 10^8 \text{ m/s})^2$<br>
+            $E = 0.001 \times 9 \times 10^{16} \text{ Joules}$<br>
+            <strong>Result:</strong> $E = 9 \times 10^{13} \text{ Joules}$ (Equivalent to powering thousands of homes for an entire year).</p>
+        </div>
+
+        <div class="example-box">
+            <h4><i class="fa-solid fa-check-circle"></i> Example 2: Schrödinger Wave Equation Application (Quantum Mechanics)</h4>
+            <p><strong>Problem:</strong> Determine the probability density of finding a particle in a 1D Infinite Potential Box.</p>
+            <div class="formula">Formula: Ψ_n(x) = √(2/L) × sin(nπx / L)</div>
+            <p><strong>Explanation:</strong> Particles at quantum scales behave as probability waves. Node points occur where the wavefunction $\Psi = 0$, meaning zero probability of particle existence at those exact coordinates.</p>
+        </div>
+    </section>
+
+    <!-- Research Notes Section -->
+    <section id="research">
+        <h2 class="section-title">Research Notes & Papers</h2>
+        <p class="section-desc">Summary of breakthrough discoveries, unknown scientific phenomena, and theoretical notes.</p>
+        
+        <div class="grid-container">
+            <div class="card">
+                <div class="badge">RESEARCH NOTE #01</div>
+                <h3>Dark Matter & WIMPs Hypothesis</h3>
+                <p>Galaxies rotate at speeds that should cause them to fly apart based on visible mass alone. This note explores Weakly Interacting Massive Particles (WIMPs) as candidates for Dark Matter.</p>
+            </div>
+            <div class="card">
+                <div class="badge">RESEARCH NOTE #02</div>
+                <h3>CRISPR-Cas9 Gene Editing Logic</h3>
+                <p>A detailed breakdown of bacterial immune defense adapted for precise genome editing, double-strand DNA breaks, and homology-directed repair mechanism.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Science Facts Section -->
+    <section id="facts">
+        <h2 class="section-title">Mind-Blowing Scientific Facts</h2>
+        <div class="grid-container">
+            <div class="card">
+                <i class="fa-solid fa-brain"></i>
+                <h3>Quantum Entanglement</h3>
+                <p>Entangled particles instantly affect each other regardless of distance—even across light-years. Einstein called this "Spooky Action at a Distance."</p>
+            </div>
+            <div class="card">
+                <i class="fa-solid fa-temperature-arrow-down"></i>
+                <h3>Absolute Zero Mechanics</h3>
+                <p>At $-273.15^\circ\text{C}$ ($0\text{ Kelvin}$), atomic movement completely stops, causing matter to enter a 5th state: Bose-Einstein Condensate.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Counter Section -->
+    <section class="highlights">
+        <h2 class="section-title">Platform Overview</h2>
         <div class="stats-box">
             <div class="stat-item">
-                <h2>৫০+</h2>
-                <p>৩ডি প্র্যাকটিক্যালস ও সিমুলেশন</p>
+                <h2>50+</h2>
+                <p>3D Practical Models</p>
             </div>
             <div class="stat-item">
-                <h2>৫০+</h2>
-                <p>নতুন ও গুরুত্বপূর্ণ রিসার্চ নোটস</p>
+                <h2>50+</h2>
+                <p>Research Notes & Papers</p>
             </div>
             <div class="stat-item">
-                <h2>১০০%</h2>
-                <p>সলভড প্র্যাকটিক্যাল এক্সাম্পল</p>
+                <h2>100%</h2>
+                <p>Solved Practical Examples</p>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; ২০২৬ RISHI SCINIVERSE। সর্বস্বত্ব সংরক্ষিত। বিজ্ঞানের আলোয় গড়া হোক ভবিষ্যৎ।</p>
+        <h3>RISHI SCINIVERSE</h3>
+        <p>Created & Maintained by <span class="founder">Souparno Roy</span></p>
+        <p style="margin-top: 15px; font-size: 0.85rem; color: #64748b;">&copy; 2026 RISHI SCINIVERSE. All Rights Reserved. Empowering Scientific Curiosity Worldwide.</p>
     </footer>
 
+    <!-- Three.js Interactive Particle System Script -->
+    <script>
+        // Interactive 3D Background with Three.js
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true });
+
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        container.appendChild(renderer.domElement);
+
+        // Particle Geometry (Scientific Cosmos Theme)
+        const geometry = new THREE.BufferGeometry();
+        const count = 700;
+        const positions = new Float32Array(count * 3);
+
+        for (let i = 0; i < count * 3; i++) {
+            positions[i] = (Math.random() - 0.5) * 15;
+        }
+
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+        const material = new THREE.PointsMaterial({
+            size: 0.03,
+            color: 0x00f2fe,
+            transparent: true,
+            opacity: 0.7
+        });
+
+        const particles = new THREE.Points(geometry, material);
+        scene.add(particles);
+
+        camera.position.z = 5;
+
+        // Mouse Parallax Effect
+        let mouseX = 0;
+        let mouseY = 0;
+        document.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX / window.innerWidth) - 0.5;
+            mouseY = (e.clientY / window.innerHeight) - 0.5;
+        });
+
+        function animate() {
+            requestAnimationFrame(animate);
+            particles.rotation.y += 0.001;
+            particles.rotation.x += 0.0005;
+
+            camera.position.x += (mouseX * 0.5 - camera.position.x) * 0.05;
+            camera.position.y += (-mouseY * 0.5 - camera.position.y) * 0.05;
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // Responsive Resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
 </body>
 </html>

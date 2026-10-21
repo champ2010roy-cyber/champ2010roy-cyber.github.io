@@ -1,629 +1,321 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RISHI SCINIVERSE - Founded by Souparno Roy</title>
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Three.js Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050816">
+<meta name="description" content="RISHI SCINIVERSE — an interactive science universe exploring physics, chemistry, mathematics, biology and open research.">
+<title>RISHI SCINIVERSE | Founder: Souparno Roy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Orbitron:wght@500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+:root{--bg:#050816;--panel:rgba(12,20,43,.78);--panel2:#0c1630;--cyan:#6ef7ff;--blue:#6d8dff;--violet:#bd8cff;--pink:#ff7bd5;--text:#f4f7ff;--muted:#aab6d3;--line:rgba(133,172,255,.19);--shadow:0 20px 70px rgba(0,0,0,.35)}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:90px}body{background:var(--bg);color:var(--text);font-family:"DM Sans",sans-serif;line-height:1.65;overflow-x:hidden}a{color:inherit}button,input,select{font:inherit}button,a{touch-action:manipulation}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--cyan);outline-offset:4px}
+#space{position:fixed;inset:0;z-index:-2;pointer-events:none}#space canvas{display:block;width:100%;height:100%}.ambient{position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 15% 15%,rgba(70,91,255,.17),transparent 34%),radial-gradient(ellipse at 85% 55%,rgba(0,225,255,.1),transparent 35%),linear-gradient(180deg,rgba(5,8,22,.1),rgba(5,8,22,.65))}
+header{position:sticky;top:0;z-index:20;background:rgba(5,8,22,.82);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}.nav{max-width:1240px;margin:auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{font:700 1.05rem Orbitron,sans-serif;letter-spacing:.04em;color:var(--cyan);text-decoration:none;display:flex;gap:10px;align-items:center}.brand-mark{width:34px;height:34px;border:1px solid var(--cyan);border-radius:50%;display:grid;place-items:center;box-shadow:0 0 22px #00eaff40}.navlinks{display:flex;align-items:center;gap:20px}.navlinks a{font-size:.88rem;text-decoration:none;color:var(--muted);transition:.2s}.navlinks a:hover{color:var(--cyan)}.nav-actions{display:flex;gap:8px;align-items:center}.pill,.btn{border:1px solid var(--line);border-radius:999px;padding:10px 16px;color:var(--text);background:rgba(255,255,255,.04);text-decoration:none;cursor:pointer;transition:transform .2s,border-color .2s,background .2s;display:inline-flex;align-items:center;justify-content:center;gap:8px}.pill:hover,.btn:hover{transform:translateY(-2px);border-color:var(--cyan)}.btn.primary{background:linear-gradient(110deg,#6ef7ff,#7d8cff);color:#071022;border:0;font-weight:800;box-shadow:0 8px 30px #00d9ff25}.menu-toggle{display:none}
+main{max-width:1240px;margin:auto;padding:0 24px}.hero{min-height:82vh;display:grid;grid-template-columns:1.08fr .92fr;align-items:center;gap:36px;padding:80px 0 65px}.eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--cyan);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;border:1px solid #6ef7ff35;background:#6ef7ff0d;padding:7px 12px;border-radius:99px}.pulse{width:7px;height:7px;background:#72ffbd;border-radius:50%;box-shadow:0 0 12px #72ffbd}.hero h1{font:800 clamp(2.6rem,6vw,5.6rem)/1.06 Orbitron,sans-serif;letter-spacing:-.06em;margin:24px 0 18px}.gradient{background:linear-gradient(100deg,#f7fbff 5%,#6ef7ff 45%,#a99cff 82%);-webkit-background-clip:text;background-clip:text;color:transparent}.hero p{font-size:1.1rem;max-width:660px;color:var(--muted)}.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:27px}.founder{margin-top:28px;color:#dce7ff;font-size:.95rem}.founder strong{color:var(--cyan);font-weight:700}.hero-visual{min-height:440px;position:relative;display:grid;place-items:center}.orb{width:min(370px,80vw);aspect-ratio:1;border-radius:50%;position:relative;background:radial-gradient(circle at 32% 27%,#9cfaff 0,#526cff 7%,#141c57 30%,#080d25 59%,#030611 72%);box-shadow:inset -20px -25px 55px #0009,0 0 75px #4e7dff28,0 0 150px #00eaff12;animation:float 7s ease-in-out infinite}.orb:before,.orb:after{content:"";position:absolute;inset:13%;border:1px solid #8ceeff80;border-radius:50%;transform:rotate(-28deg) scaleY(.35)}.orb:after{transform:rotate(55deg) scaleY(.42);border-color:#bb8cff99}.orb-core{position:absolute;inset:42%;border-radius:50%;background:#e4ffff;box-shadow:0 0 30px 10px #5ffaffaa}.orbit{position:absolute;width:110%;height:35%;border:1px solid #6ef7ff85;border-radius:50%;transform:rotate(-28deg);animation:spin 18s linear infinite}.orbit.two{width:125%;height:46%;transform:rotate(48deg);border-color:#a78bfa80;animation-direction:reverse;animation-duration:25s}.orbit-dot{position:absolute;width:12px;height:12px;left:12%;top:47%;border-radius:50%;background:var(--cyan);box-shadow:0 0 20px var(--cyan)}.visual-caption{position:absolute;bottom:4%;right:2%;padding:14px 17px;border:1px solid var(--line);border-radius:14px;background:#0a1128d9;backdrop-filter:blur(12px);font-size:.83rem;color:var(--muted)}.visual-caption b{display:block;color:var(--text);font-size:1rem}
+@keyframes float{50%{transform:translateY(-12px)}}@keyframes spin{to{rotate:360deg}}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:4px 0 30px}.stat{border:1px solid var(--line);background:#0b1329b8;border-radius:16px;padding:18px 20px}.stat strong{display:block;font:700 1.5rem Orbitron;color:var(--cyan)}.stat span{font-size:.85rem;color:var(--muted)}
+section{padding:78px 0;border-top:1px solid #8aa9ff13}.section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:28px}.kicker{color:var(--violet);font-size:.76rem;letter-spacing:.15em;text-transform:uppercase;font-weight:700}.section-head h2{font:700 clamp(1.7rem,3.5vw,2.7rem) Orbitron,sans-serif;letter-spacing:-.04em;margin:8px 0}.section-head p{color:var(--muted);max-width:620px}.section-head .small-note{font-size:.8rem;color:#8290b3;max-width:280px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.card{background:linear-gradient(150deg,rgba(17,28,58,.88),rgba(7,13,31,.9));border:1px solid var(--line);border-radius:20px;padding:23px;min-width:0;box-shadow:var(--shadow);transition:transform .25s,border-color .25s}.card:hover{transform:translateY(-5px);border-color:#6ef7ff68}.card-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}.icon{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;font-size:1.4rem;background:linear-gradient(135deg,#6ef7ff24,#a78bfa25);border:1px solid #8caaff25}.tag{font-size:.7rem;border:1px solid #8caaff30;border-radius:99px;padding:5px 9px;color:#b6c7ff}.card h3{font-size:1.12rem;line-height:1.35;margin-bottom:9px}.card p{font-size:.91rem;color:var(--muted);margin-bottom:18px}.text-link{color:var(--cyan);text-decoration:none;font-weight:700;font-size:.88rem}.text-link:hover{text-decoration:underline}
+.lab-layout{display:grid;grid-template-columns:.85fr 1.15fr;gap:20px}.control-panel{display:flex;flex-direction:column;gap:14px}.field{padding:15px;border:1px solid var(--line);border-radius:14px;background:#0b1329}.field label{display:flex;justify-content:space-between;gap:10px;font-size:.9rem;margin-bottom:8px}.field output{color:var(--cyan);font-weight:700}input[type=range]{width:100%;accent-color:var(--cyan)}.field small{display:block;color:var(--muted);margin-top:5px}.canvas-panel{border:1px solid var(--line);border-radius:20px;padding:18px;background:linear-gradient(145deg,#0c1733,#070b1c);min-height:350px;display:flex;flex-direction:column}.canvas-panel h3{font-size:1rem}.canvas-panel p{font-size:.85rem;color:var(--muted);margin-bottom:12px}.chart-wrap{position:relative;flex:1;min-height:250px}.formula{padding:12px 14px;margin-top:12px;background:#6ef7ff0b;border:1px solid #6ef7ff25;border-radius:12px;color:#dcecff;font-family:ui-monospace,monospace;overflow-wrap:anywhere}
+.video-grid .card{padding:0;overflow:hidden}.video-thumb{aspect-ratio:16/9;display:grid;place-items:center;position:relative;background:radial-gradient(circle at 50% 40%,#254d92,#10183d 55%,#070b1b);overflow:hidden}.video-thumb:before{content:"";position:absolute;width:190px;height:190px;border:1px solid #6ef7ff55;border-radius:50%;box-shadow:0 0 35px #00eaff20,inset 0 0 35px #00eaff20}.video-thumb .play{position:relative;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:#6ef7ff;color:#061022;font-size:1.3rem;box-shadow:0 0 30px #6ef7ff80}.video-body{padding:20px}.video-body h3{margin-bottom:8px}.video-body p{margin-bottom:14px}
+.research-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.research-item{display:flex;gap:15px;align-items:flex-start}.research-item .icon{flex-shrink:0}.research-item p{margin-bottom:12px}.source-label{color:#9eafff;font-size:.76rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}.chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.chart-card{min-height:320px}.chart-card .chart-wrap{min-height:240px}
+.fact-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.fact-card{cursor:pointer;text-align:left;width:100%;color:inherit}.fact-card .fact-reveal{color:var(--cyan);font-size:.85rem;font-weight:700}.fact-detail{display:none;border-top:1px solid var(--line);padding-top:13px;margin-top:12px;color:#d4e0ff;font-size:.9rem}.fact-card[aria-expanded=true] .fact-detail{display:block}.fact-card[aria-expanded=true] .fact-reveal{display:none}
+.notice{border:1px solid #ffcf6b40;background:#ffcf6b0b;color:#d6d9e8;border-radius:14px;padding:15px 17px;font-size:.86rem;margin-top:18px}.notice strong{color:#ffd580}
+footer{border-top:1px solid var(--line);padding:36px 24px;text-align:center;color:var(--muted);background:#040713b8}footer .footer-brand{font:700 1.1rem Orbitron;color:var(--cyan);margin-bottom:9px}footer .founder{margin:0}
+#toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#111c39;border:1px solid var(--cyan);padding:11px 16px;border-radius:12px;z-index:99;transition:.25s}#toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:900px){.navlinks{display:none;position:absolute;top:100%;left:0;right:0;background:#080e23;padding:18px 24px;border-bottom:1px solid var(--line);flex-direction:column;align-items:flex-start}.navlinks.open{display:flex}.menu-toggle{display:inline-flex}.hero{grid-template-columns:1fr;padding-top:58px}.hero-visual{min-height:350px;grid-row:1}.hero-copy{grid-row:2}.orb{width:min(300px,72vw)}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.lab-layout{grid-template-columns:1fr}.section-head{align-items:flex-start;flex-direction:column}.section-head .small-note{max-width:100%}}
+@media(max-width:600px){main{padding:0 16px}.nav{padding:12px 16px}.brand{font-size:.78rem}.brand-mark{width:30px;height:30px}.nav-actions .pill{padding:8px 10px;font-size:.8rem}.hero{min-height:auto;padding:42px 0 45px;gap:5px}.hero h1{font-size:clamp(2.2rem,12vw,3.6rem)}.hero p{font-size:1rem}.hero-visual{min-height:290px}.orb{width:230px}.visual-caption{right:0;bottom:0;font-size:.75rem}.stats{grid-template-columns:1fr;gap:9px}.stat{padding:14px 16px}.stat strong{font-size:1.2rem}.grid,.research-grid,.chart-grid,.fact-grid{grid-template-columns:1fr}.card{padding:19px}section{padding:55px 0}.section-head h2{font-size:1.65rem}.hero-actions .btn{width:100%}.chart-card{min-height:300px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 
-    <style>
-        :root {
-            --primary-color: #070b19;
-            --accent-color: #00f2fe;
-            --secondary-accent: #4facfe;
-            --text-color: #f8fafc;
-            --card-bg: rgba(15, 23, 42, 0.95);
-            --glow: 0 0 25px rgba(0, 242, 254, 0.5);
-        }
+/* Expanded 3D practical lab */
+.practical-controls{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.practical-controls select{background:#0b1329;color:var(--text);border:1px solid var(--line);border-radius:12px;padding:11px 14px;min-width:190px}
+.lab3d-layout{display:grid;grid-template-columns:1.15fr .85fr;gap:18px}
+.lab3d-stage{position:relative;min-height:390px;border:1px solid #6ef7ff38;border-radius:20px;overflow:hidden;background:radial-gradient(ellipse at center,#152653,#070b1c 72%);isolation:isolate}
+#model3d{position:absolute;inset:0;width:100%;height:100%;display:block}
+.stage-label{position:absolute;top:14px;left:15px;z-index:2;border:1px solid var(--line);background:#071022c9;border-radius:10px;padding:7px 10px;font-size:.76rem;color:#d9eaff;backdrop-filter:blur(8px)}
+.stage-help{position:absolute;bottom:12px;left:14px;right:14px;z-index:2;color:#b5c4e8;background:#071022bd;border:1px solid var(--line);border-radius:10px;padding:8px 11px;font-size:.78rem}
+.lab3d-info{display:flex;flex-direction:column;gap:12px}.lab3d-info .card{height:100%}.step-list{padding-left:20px;color:var(--muted);font-size:.9rem}.step-list li{margin:8px 0}.video-note{font-size:.78rem!important;color:#8494ba!important;margin-top:8px}
+@media(max-width:900px){.lab3d-layout{grid-template-columns:1fr}.lab3d-stage{min-height:330px}}
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background-color: var(--primary-color);
-            color: var(--text-color);
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        #canvas-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        /* Header & Navigation */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 8%;
-            background: rgba(7, 11, 25, 0.98);
-            backdrop-filter: blur(15px);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(0, 242, 254, 0.3);
-        }
-
-        .logo {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--accent-color);
-            text-shadow: var(--glow);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 20px;
-            align-items: center;
-        }
-
-        nav ul li a {
-            color: var(--text-color);
-            text-decoration: none;
-            font-weight: 600;
-            transition: 0.3s;
-        }
-
-        nav ul li a:hover {
-            color: var(--accent-color);
-            text-shadow: var(--glow);
-        }
-
-        .lang-btn {
-            background: transparent;
-            border: 1px solid var(--accent-color);
-            color: var(--accent-color);
-            padding: 6px 14px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: 0.3s;
-        }
-
-        .lang-btn:hover {
-            background: var(--accent-color);
-            color: var(--primary-color);
-        }
-
-        /* Hero Section */
-        .hero {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 140px 20px 90px 20px;
-            min-height: 90vh;
-            background: radial-gradient(circle, rgba(7, 11, 25, 0.4) 0%, rgba(7, 11, 25, 0.95) 100%);
-        }
-
-        .hero h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 4rem;
-            margin-bottom: 15px;
-            background: linear-gradient(to right, var(--accent-color), var(--secondary-accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: var(--glow);
-        }
-
-        .hero .subtitle {
-            font-size: 1.3rem;
-            color: #38bdf8;
-            margin-bottom: 25px;
-            font-weight: 500;
-        }
-
-        .hero p {
-            font-size: 1.15rem;
-            max-width: 850px;
-            margin-bottom: 40px;
-            color: #cbd5e1;
-            line-height: 1.8;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .btn {
-            padding: 14px 32px;
-            border-radius: 30px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: 0.3s;
-            cursor: pointer;
-            border: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent-color), var(--secondary-accent));
-            color: var(--primary-color);
-            box-shadow: var(--glow);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 0 35px rgba(0, 242, 254, 0.9);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-color);
-            border: 2px solid var(--accent-color);
-        }
-
-        .btn-secondary:hover {
-            background: var(--accent-color);
-            color: var(--primary-color);
-        }
-
-        /* General Section */
-        section {
-            padding: 90px 8%;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .section-title {
-            text-align: center;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.6rem;
-            margin-bottom: 15px;
-            color: var(--accent-color);
-            text-shadow: var(--glow);
-        }
-
-        .section-desc {
-            text-align: center;
-            color: #cbd5e1;
-            max-width: 750px;
-            margin: 0 auto 50px auto;
-            font-size: 1.1rem;
-            line-height: 1.6;
-        }
-
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-        }
-
-        /* Cards */
-        .card {
-            background: var(--card-bg);
-            border: 1px solid rgba(0, 242, 254, 0.2);
-            border-radius: 16px;
-            padding: 35px;
-            backdrop-filter: blur(12px);
-            transition: 0.4s;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent-color);
-            box-shadow: var(--glow);
-        }
-
-        .card i {
-            font-size: 3rem;
-            color: var(--accent-color);
-            margin-bottom: 20px;
-        }
-
-        .card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: #fff;
-        }
-
-        .card p {
-            color: #94a3b8;
-            font-size: 0.98rem;
-            line-height: 1.7;
-            margin-bottom: 20px;
-        }
-
-        .badge {
-            background: rgba(0, 242, 254, 0.15);
-            color: var(--accent-color);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            width: fit-content;
-            margin-bottom: 15px;
-            border: 1px solid rgba(0, 242, 254, 0.4);
-        }
-
-        /* Simulation Box */
-        .simulation-box {
-            position: relative;
-            width: 100%;
-            height: 200px;
-            background: #020617;
-            border-radius: 12px;
-            overflow: hidden;
-            margin-bottom: 15px;
-            border: 1px solid rgba(0, 242, 254, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .simulation-text {
-            color: #38bdf8;
-            font-size: 0.95rem;
-            font-weight: 600;
-            text-align: center;
-            padding: 0 15px;
-        }
-
-        /* Fact Modal */
-        .fact-trigger-card {
-            cursor: pointer;
-            text-align: center;
-            border: 2px dashed var(--accent-color);
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.85);
-            backdrop-filter: blur(10px);
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 20px;
-            border: 2px solid var(--accent-color);
-            max-width: 600px;
-            width: 90%;
-            text-align: center;
-            box-shadow: var(--glow);
-            position: relative;
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 2rem;
-            color: var(--accent-color);
-            cursor: pointer;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 50px 20px;
-            background: rgba(4, 7, 16, 0.98);
-            border-top: 1px solid rgba(0, 242, 254, 0.2);
-            color: #94a3b8;
-        }
-
-        footer h3 {
-            color: #fff;
-            margin-bottom: 10px;
-            font-family: 'Orbitron', sans-serif;
-        }
-
-        footer .founder {
-            color: var(--accent-color);
-            font-weight: 600;
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.6rem; }
-            nav ul { display: none; }
-            section { padding: 60px 5%; }
-        }
-    </style>
+</style>
 </head>
 <body>
+<div id="space" aria-hidden="true"></div><div class="ambient" aria-hidden="true"></div>
+<header>
+ <div class="nav">
+  <a class="brand" href="#home" aria-label="RISHI SCINIVERSE home"><span class="brand-mark">✦</span><span>RISHI SCINIVERSE</span></a>
+  <nav class="navlinks" id="navlinks" aria-label="Main navigation">
+   <a href="#universe" data-bn="বিষয়সমূহ" data-en="Explore">বিষয়সমূহ</a><a href="#lab" data-bn="ইন্টারঅ্যাকটিভ ল্যাব" data-en="Interactive Lab">ইন্টারঅ্যাকটিভ ল্যাব</a><a href="#visuals" data-bn="ভিডিও ও ভিজ্যুয়াল" data-en="Videos & Visuals">ভিডিও ও ভিজ্যুয়াল</a><a href="#research" data-bn="রিসার্চ" data-en="Research">রিসার্চ</a><a href="#mysteries" data-bn="রহস্যময় তথ্য" data-en="Mysteries">রহস্যময় তথ্য</a>
+  </nav>
+  <div class="nav-actions"><button class="pill" id="langBtn" type="button" aria-label="Switch language">EN / BN</button><button class="pill menu-toggle" id="menuBtn" type="button" aria-expanded="false" aria-controls="navlinks" aria-label="Open navigation">☰</button></div>
+ </div>
+</header>
+<main>
+<section class="hero" id="home">
+ <div class="hero-copy">
+  <span class="eyebrow"><span class="pulse"></span><span data-bn="বিজ্ঞান • কৌতূহল • আবিষ্কার" data-en="SCIENCE • CURIOSITY • DISCOVERY">বিজ্ঞান • কৌতূহল • আবিষ্কার</span></span>
+  <h1><span class="gradient">RISHI</span><br><span class="gradient">SCINIVERSE</span></h1>
+  <p data-bn="মহাবিশ্বের গভীর রহস্য থেকে অণুর অদৃশ্য জগৎ—ইন্টারঅ্যাকটিভ সিমুলেশন, ডেটা-চালিত চার্ট, বৈজ্ঞানিক প্রমাণ এবং বিশ্বস্ত গবেষণা-সূত্রের মাধ্যমে বিজ্ঞানকে আবিষ্কার করো।" data-en="From cosmic mysteries to the invisible world of molecules—explore science through interactive simulations, data-driven charts, scientific evidence, and trusted research sources.">মহাবিশ্বের গভীর রহস্য থেকে অণুর অদৃশ্য জগৎ—ইন্টারঅ্যাকটিভ সিমুলেশন, ডেটা-চালিত চার্ট, বৈজ্ঞানিক প্রমাণ এবং বিশ্বস্ত গবেষণা-সূত্রের মাধ্যমে বিজ্ঞানকে আবিষ্কার করো।</p>
+  <div class="hero-actions"><a class="btn primary" href="#lab" data-bn="✦ সিমুলেশন শুরু করো" data-en="✦ Launch a Simulation">✦ সিমুলেশন শুরু করো</a><a class="btn" href="#research" data-bn="⌕ গবেষণা অন্বেষণ" data-en="⌕ Explore Research">⌕ গবেষণা অন্বেষণ</a></div>
+  <div class="founder"><span data-bn="প্রতিষ্ঠাতা:" data-en="Founder:">প্রতিষ্ঠাতা:</span> <strong>Souparno Roy</strong></div>
+ </div>
+ <div class="hero-visual" aria-label="Animated abstract planet illustration"><div class="orb"><div class="orb-core"></div><div class="orbit"><span class="orbit-dot"></span></div><div class="orbit two"></div></div><div class="visual-caption"><b>Explore the unknown</b><span data-bn="প্রশ্ন করো। পরীক্ষা করো। আবিষ্কার করো।" data-en="Question. Experiment. Discover.">প্রশ্ন করো। পরীক্ষা করো। আবিষ্কার করো।</span></div></div>
+</section>
+<div class="stats">
+ <div class="stat"><strong>4</strong><span data-bn="বিজ্ঞানের মূল শাখা" data-en="Core science fields">বিজ্ঞানের মূল শাখা</span></div>
+ <div class="stat"><strong>∞</strong><span data-bn="অনুসন্ধানের প্রশ্ন" data-en="Questions to explore">অনুসন্ধানের প্রশ্ন</span></div>
+ <div class="stat"><strong>OPEN</strong><span data-bn="উন্মুক্ত গবেষণা-সূত্র" data-en="Open research resources">উন্মুক্ত গবেষণা-সূত্র</span></div>
+</div>
 
-    <!-- 3D Canvas Background -->
-    <div id="canvas-container"></div>
+<section id="universe">
+ <div class="section-head"><div><div class="kicker">01 / THE KNOWLEDGE MAP</div><h2 data-bn="এক ইউনিভার্স, চারটি দৃষ্টিকোণ" data-en="One universe, four lenses">এক ইউনিভার্স, চারটি দৃষ্টিকোণ</h2><p data-bn="প্রতিটি বিষয়ের সঙ্গে রয়েছে ধারণা, ভিজ্যুয়াল ব্যাখ্যা এবং পরবর্তী অনুসন্ধানের জন্য নির্ভরযোগ্য রিসোর্স।" data-en="Each field connects core concepts, visual explanations, and reliable resources for deeper exploration.">প্রতিটি বিষয়ের সঙ্গে রয়েছে ধারণা, ভিজ্যুয়াল ব্যাখ্যা এবং পরবর্তী অনুসন্ধানের জন্য নির্ভরযোগ্য রিসোর্স।</p></div><div class="small-note" data-bn="বিজ্ঞান মানে শুধু উত্তর নয়—উত্তরে পৌঁছনোর প্রমাণও।" data-en="Science is not just the answer—it is the evidence behind it.">বিজ্ঞান মানে শুধু উত্তর নয়—উত্তরে পৌঁছনোর প্রমাণও।</div></div>
+ <div class="grid">
+  <article class="card"><div class="card-top"><div class="icon">⚛</div><span class="tag">PHYSICS</span></div><h3 data-bn="কোয়ান্টাম ও মহাকাশ" data-en="Quantum & Cosmos">কোয়ান্টাম ও মহাকাশ</h3><p data-bn="তরঙ্গ, কণা, আলো, মাধ্যাকর্ষণ, ব্ল্যাক হোল এবং কণার সংঘর্ষ—মডেল ও ডেটা দিয়ে বোঝো।" data-en="Waves, particles, light, gravity, black holes, and particle collisions—understand them through models and data.">তরঙ্গ, কণা, আলো, মাধ্যাকর্ষণ, ব্ল্যাক হোল এবং কণার সংঘর্ষ—মডেল ও ডেটা দিয়ে বোঝো।</p><a class="text-link" href="https://phet.colorado.edu/en/simulations/filter?subjects=physics&type=html" target="_blank" rel="noopener">Explore physics ↗</a></article>
+  <article class="card"><div class="card-top"><div class="icon">◈</div><span class="tag">CHEMISTRY</span></div><h3 data-bn="অণুর গঠন ও বিক্রিয়া" data-en="Molecules & Reactions">অণুর গঠন ও বিক্রিয়া</h3><p data-bn="মলিকিউলার জ্যামিতি, বন্ধন, অ্যাসিড-বেস এবং বিক্রিয়ার শক্তি—ইন্টারঅ্যাকটিভ মডেলে অন্বেষণ করো।" data-en="Explore molecular geometry, bonding, acids and bases, and reaction energy in interactive models.">মলিকিউলার জ্যামিতি, বন্ধন, অ্যাসিড-বেস এবং বিক্রিয়ার শক্তি—ইন্টারঅ্যাকটিভ মডেলে অন্বেষণ করো।</p><a class="text-link" href="https://phet.colorado.edu/en/simulations/filter?subjects=chemistry&type=html" target="_blank" rel="noopener">Explore chemistry ↗</a></article>
+  <article class="card"><div class="card-top"><div class="icon">∑</div><span class="tag">MATHEMATICS</span></div><h3 data-bn="গণিত ও দৃশ্যমান প্রমাণ" data-en="Mathematics & Visual Proofs">গণিত ও দৃশ্যমান প্রমাণ</h3><p data-bn="ফাংশন, গ্রাফ, জ্যামিতি, সম্ভাবনা এবং ডেটার প্যাটার্নকে চার্ট ও ধাপে ধাপে যুক্তিতে দেখো।" data-en="See functions, graphs, geometry, probability, and data patterns through charts and step-by-step reasoning.">ফাংশন, গ্রাফ, জ্যামিতি, সম্ভাবনা এবং ডেটার প্যাটার্নকে চার্ট ও ধাপে ধাপে যুক্তিতে দেখো।</p><a class="text-link" href="https://www.desmos.com/calculator" target="_blank" rel="noopener">Open graphing calculator ↗</a></article>
+  <article class="card"><div class="card-top"><div class="icon">🧬</div><span class="tag">BIOLOGY</span></div><h3 data-bn="কোষ, DNA ও জীবন" data-en="Cells, DNA & Life">কোষ, DNA ও জীবন</h3><p data-bn="জিনের প্রকাশ, কোষের ঝিল্লি, বিবর্তন এবং প্রোটিন—জীবনের ক্ষুদ্র জগতকে বড় করে দেখো।" data-en="Zoom into gene expression, cell membranes, evolution, and proteins—the tiny systems behind life.">জিনের প্রকাশ, কোষের ঝিল্লি, বিবর্তন এবং প্রোটিন—জীবনের ক্ষুদ্র জগতকে বড় করে দেখো।</p><a class="text-link" href="https://phet.colorado.edu/en/simulations/filter?subjects=biology&type=html" target="_blank" rel="noopener">Explore biology ↗</a></article>
+  <article class="card"><div class="card-top"><div class="icon">🌌</div><span class="tag">ASTRONOMY</span></div><h3 data-bn="গ্রহ, নক্ষত্র ও গ্যালাক্সি" data-en="Planets, Stars & Galaxies">গ্রহ, নক্ষত্র ও গ্যালাক্সি</h3><p data-bn="নাসার ছবি, মহাকাশ মিশন এবং জ্যোতির্বিজ্ঞানের তথ্য থেকে মহাবিশ্বের বিস্ময়কর স্কেল আবিষ্কার করো।" data-en="Discover cosmic scales through NASA imagery, space missions, and astronomy data.">নাসার ছবি, মহাকাশ মিশন এবং জ্যোতির্বিজ্ঞানের তথ্য থেকে মহাবিশ্বের বিস্ময়কর স্কেল আবিষ্কার করো।</p><a class="text-link" href="https://science.nasa.gov/" target="_blank" rel="noopener">NASA Science ↗</a></article>
+  <article class="card"><div class="card-top"><div class="icon">📊</div><span class="tag">DATA SCIENCE</span></div><h3 data-bn="ডেটা, চার্ট ও প্যাটার্ন" data-en="Data, Charts & Patterns">ডেটা, চার্ট ও প্যাটার্ন</h3><p data-bn="পরিমাপ, তুলনা এবং অনিশ্চয়তা বোঝো। ডেটা কী বলছে আর কী বলছে না—সেটিও শিখো।" data-en="Learn to compare measurements and understand uncertainty—and what the data cannot tell us.">পরিমাপ, তুলনা এবং অনিশ্চয়তা বোঝো। ডেটা কী বলছে আর কী বলছে না—সেটিও শিখো।</p><a class="text-link" href="#charts" data-bn="চার্ট দেখো ↓" data-en="See charts ↓">চার্ট দেখো ↓</a></article>
+ </div>
+</section>
 
-    <!-- Header / Navbar -->
-    <header>
-        <div class="logo">
-            <i class="fa-solid fa-atom fa-spin"></i> ঋষি সাইনিভার্স (RISHI SCINIVERSE)
-        </div>
-        <nav>
-            <ul>
-                <li><a href="#home">হোম</a></li>
-                <li><a href="#subjects">বিষয়সমূহ</a></li>
-                <li><a href="#practicals">প্র্যাকটিক্যাল ল্যাব (২০০+)</a></li>
-                <li><a href="#research">রিসার্চ পেপার্স (৩০+)</a></li>
-                <li><a href="#facts">অজানা তথ্য</a></li>
-                <li><button class="lang-btn" onclick="toggleLanguage()"><i class="fa-solid fa-globe"></i> EN / BN</button></li>
-            </ul>
-        </nav>
-    </header>
+<section id="lab">
+ <div class="section-head"><div><div class="kicker">02 / INTERACTIVE LAB</div><h2 data-bn="নিজেই পরীক্ষা করো" data-en="Run your own experiment">নিজেই পরীক্ষা করো</h2><p data-bn="স্লাইডার বদলাও, গ্রাফের পরিবর্তন দেখো, তারপর ফলাফল ব্যাখ্যা করো। এটি একটি শিক্ষামূলক আদর্শ মডেল—বাস্তব পরীক্ষার ডেটা নয়।" data-en="Adjust the sliders, watch the graph change, then interpret the result. This is an educational model, not measured experimental data.">স্লাইডার বদলাও, গ্রাফের পরিবর্তন দেখো, তারপর ফলাফল ব্যাখ্যা করো। এটি একটি শিক্ষামূলক আদর্শ মডেল—বাস্তব পরীক্ষার ডেটা নয়।</p></div></div>
+ <div class="lab-layout">
+  <div class="control-panel">
+   <div class="field"><label for="amp"><span data-bn="তরঙ্গের বিস্তার (Amplitude)" data-en="Wave amplitude">তরঙ্গের বিস্তার (Amplitude)</span><output id="ampVal">1.0</output></label><input id="amp" type="range" min="0.2" max="2" step="0.1" value="1"><small data-bn="বিস্তার বাড়লে তরঙ্গের উচ্চতা বাড়ে।" data-en="Increasing amplitude raises the wave height.">বিস্তার বাড়লে তরঙ্গের উচ্চতা বাড়ে।</small></div>
+   <div class="field"><label for="freq"><span data-bn="কম্পাঙ্ক (Frequency)" data-en="Frequency">কম্পাঙ্ক (Frequency)</span><output id="freqVal">1.0</output></label><input id="freq" type="range" min="0.5" max="3" step="0.1" value="1"><small data-bn="কম্পাঙ্ক বাড়লে একই দূরত্বে আরও বেশি দোলন দেখা যায়।" data-en="Higher frequency creates more oscillations over the same distance.">কম্পাঙ্ক বাড়লে একই দূরত্বে আরও বেশি দোলন দেখা যায়।</small></div>
+   <div class="field"><label for="phase"><span data-bn="ফেজ (Phase)" data-en="Phase">ফেজ (Phase)</span><output id="phaseVal">0°</output></label><input id="phase" type="range" min="0" max="360" step="15" value="0"><small data-bn="ফেজ বদলালে তরঙ্গটি অনুভূমিকভাবে সরে যায়।" data-en="Changing phase shifts the wave horizontally.">ফেজ বদলালে তরঙ্গটি অনুভূমিকভাবে সরে যায়।</small></div>
+   <button class="btn" id="resetLab" type="button" data-bn="↺ ডিফল্টে ফেরাও" data-en="↺ Reset experiment">↺ ডিফল্টে ফেরাও</button>
+  </div>
+  <div class="canvas-panel"><h3 data-bn="সাইন তরঙ্গের মডেল" data-en="Sine wave model">সাইন তরঙ্গের মডেল</h3><p data-bn="y = A sin(2πfx + φ) — প্যারামিটার বদলে রেখার রূপ পর্যবেক্ষণ করো।" data-en="y = A sin(2πfx + φ) — change parameters and observe the curve.">y = A sin(2πfx + φ) — প্যারামিটার বদলে রেখার রূপ পর্যবেক্ষণ করো।</p><div class="chart-wrap"><canvas id="waveChart" role="img" aria-label="Interactive sine wave chart"></canvas></div><div class="formula" id="waveSummary" aria-live="polite">A = 1.0 · f = 1.0 · φ = 0°</div></div>
+ </div>
+</section>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <h1>RISHI SCINIVERSE</h1>
-        <div class="subtitle">প্রতিষ্ঠাতা ও প্রধান গবেষক: <strong>সৌপর্ণ রায় (Souparno Roy)</strong></div>
-        <p id="hero-desc">পদার্থবিদ্যা, রসায়ন, গণিত এবং জীববিদ্যার এক উন্নত ভার্চুয়াল ইউনিভার্স। এখানে ফিজিক্স, কেমিস্ট্রি, বায়োলজি এবং ম্যাথের জন্য রয়েছে ২০০+ এর বেশি থ্রি-ডি অ্যানিমেশন ও সিমুলেশন ল্যাব এবং বিশ্বখ্যাত ল্যাবরেটরিগুলোর (CERN, MIT, Stanford ইত্যাদি) ৩০+ গভীর রিসার্চ পেপার।</p>
-        <div class="cta-buttons">
-            <a href="#practicals" class="btn btn-primary"><i class="fa-solid fa-cube"></i> থ্রি-ডি সিমুলেশন ল্যাব</a>
-            <a href="#research" class="btn btn-secondary"><i class="fa-solid fa-flask-vial"></i> প্রাতিষ্ঠানিক গবেষণা</a>
-        </div>
-    </section>
 
-    <!-- Subjects Section -->
-    <section id="subjects">
-        <h2 class="section-title">মূল বিজ্ঞান শাখা</h2>
-        <p class="section-desc">গভীর গাণিতিক বিশ্লেষণ, থ্রি-ডি প্র্যাকটিক্যাল ল্যাব এবং লজিক্যাল কাঠামোর বিশদ বিবরণ।</p>
-        
-        <div class="grid-container">
-            <div class="card">
-                <div>
-                    <i class="fa-solid fa-bolt"></i>
-                    <h3>পদার্থবিদ্যা (Physics)</h3>
-                    <p>কোয়ান্টাম মেকানিক্স, আইনস্টাইনের আপেক্ষিকতা তত্ত্ব, ব্ল্যাক হোল থার্মোডাইনামিক্স এবং তড়িৎ গতিবিদ্যার ওপর ৫০+ বিস্তারিত থ্রি-ডি প্র্যাকটিক্যাল সিমুলেশন মডিউল।</p>
-                </div>
-                <a href="#practicals" class="btn btn-secondary">ফিজিক্স ল্যাব</a>
-            </div>
-            <div class="card">
-                <div>
-                    <i class="fa-solid fa-flask"></i>
-                    <h3>রসায়ন (Chemistry)</h3>
-                    <p>মলিকুলার অরবিটাল থিওরি, কোঅর্ডিনেশন কেমিস্ট্রি, জৈব সংশ্লেষণ এবং রাসায়নিক গতিবিদ্যার ওপর ৫০+ বিস্তারিত থ্রি-ডি প্র্যাকটিক্যাল সিমুলেশন মডিউল।</p>
-                </div>
-                <a href="#practicals" class="btn btn-secondary">কেমিস্ট্রি ল্যাব</a>
-            </div>
-            <div class="card">
-                <div>
-                    <i class="fa-solid fa-calculator"></i>
-                    <h3>গণিত (Mathematics)</h3>
-                    <p>মাল্টিভ্যারিয়েবল ক্যালকুলাস, টেন্সর অ্যানালাইসিস, টপোলজি এবং রিমানিয়ান জ্যামিতির ওপর ৫০+ বিস্তারিত থ্রি-ডি প্র্যাকটিক্যাল সিমুলেশন মডিউল।</p>
-                </div>
-                <a href="#practicals" class="btn btn-secondary">ম্যাথ ল্যাব</a>
-            </div>
-            <div class="card">
-                <div>
-                    <i class="fa-solid fa-dna"></i>
-                    <h3>জীববিদ্যা (Biology)</h3>
-                    <p>ডিএনএ রেপ্লিকেশন, জিন এডিটিং (CRISPR), প্রোটিন ফোল্ডিং এবং নিউরোট্রান্সমিটার সিগন্যালিংয়ের ওপর ৫০+ বিস্তারিত থ্রি-ডি প্র্যাকটিক্যাল সিমুলেশন মডিউল।</p>
-                </div>
-                <a href="#practicals" class="btn btn-secondary">বায়োলজি ল্যাব</a>
-            </div>
-        </div>
-    </section>
+<section id="practicals">
+ <div class="section-head"><div><div class="kicker">02 / 3D PRACTICAL STUDIO</div><h2 data-bn="নিজের হাতে 3D বিজ্ঞান ল্যাব" data-en="Hands-on 3D science lab">নিজের হাতে 3D বিজ্ঞান ল্যাব</h2><p data-bn="মডেল বেছে নাও, ঘূর্ণন ও প্যারামিটার বদলাও, তারপর কী দেখছ তা বৈজ্ঞানিকভাবে ব্যাখ্যা করো। এই 3D মডেলগুলো শিক্ষামূলক ভিজ্যুয়াল; বাস্তব পরীক্ষার বিকল্প নয়।" data-en="Choose a model, change its rotation and parameters, then explain what you observe. These 3D models are educational visualisations, not substitutes for real experiments.">মডেল বেছে নাও, ঘূর্ণন ও প্যারামিটার বদলাও, তারপর কী দেখছ তা বৈজ্ঞানিকভাবে ব্যাখ্যা করো। এই 3D মডেলগুলো শিক্ষামূলক ভিজ্যুয়াল; বাস্তব পরীক্ষার বিকল্প নয়।</p></div></div>
+ <div class="practical-controls">
+  <label class="field" style="padding:8px 12px;margin:0"><span data-bn="মডেল নির্বাচন" data-en="Choose model">মডেল নির্বাচন</span><select id="modelSelect" aria-label="Choose 3D model"><option value="atom">Atom / পরমাণু</option><option value="molecule">Molecule / অণু</option><option value="solar">Solar system / সৌরজগৎ</option><option value="dna">DNA helix / DNA</option><option value="pendulum">Pendulum / দোলক</option><option value="crystal">Crystal lattice / স্ফটিক জালক</option></select></label>
+  <label class="field" style="padding:8px 12px;margin:0;min-width:220px"><span><span data-bn="অ্যানিমেশনের গতি" data-en="Animation speed">অ্যানিমেশনের গতি</span> <output id="speedOut">1.0×</output></span><input id="modelSpeed" type="range" min="0" max="2.5" step=".1" value="1"></label>
+  <button class="btn" id="modelPause" type="button">Ⅱ <span data-bn="পজ / চালু" data-en="Pause / play">পজ / চালু</span></button>
+  <button class="btn" id="modelReset" type="button">↺ <span data-bn="রিসেট" data-en="Reset">রিসেট</span></button>
+ </div>
+ <div class="lab3d-layout">
+  <div class="lab3d-stage"><div class="stage-label" id="modelTitle">ATOM MODEL · 3D</div><canvas id="model3d" aria-label="Interactive 3D science model"></canvas><div class="stage-help" id="modelHint">Drag with mouse or touch to rotate the model. Scroll to zoom.</div></div>
+  <div class="lab3d-info"><article class="card"><div class="card-top"><div class="icon">✧</div><span class="tag" id="modelTag">PHYSICS</span></div><h3 id="modelHeading">পরমাণুর গ্রহীয় মডেল</h3><p id="modelDescription">নিউক্লিয়াসকে ঘিরে ইলেকট্রনের কক্ষপথের একটি সরলীকৃত ভিজ্যুয়াল। বাস্তব কোয়ান্টাম মডেলে ইলেকট্রনের নির্দিষ্ট গ্রহের মতো পথ নেই; অরবিটাল সম্ভাব্যতা বর্ণনা করে।</p><ol class="step-list" id="modelSteps"><li>মডেল ঘোরাও এবং কেন্দ্রের নিউক্লিয়াস দেখো।</li><li>গতি কমিয়ে পৃথক কক্ষপথের বিন্যাস বোঝো।</li><li>মডেলটি কোথায় বাস্তবতার সরলীকরণ, তা চিহ্নিত করো।</li></ol><div class="formula" id="modelFormula">Concept: nucleus + electron probability distribution</div></article></div>
+ </div>
+ <div class="grid" style="margin-top:18px">
+  <article class="card"><div class="card-top"><div class="icon">🧲</div><span class="tag">PHYSICS</span></div><h3 data-bn="চৌম্বক ক্ষেত্র ও বলরেখা" data-en="Magnetic fields & field lines">চৌম্বক ক্ষেত্র ও বলরেখা</h3><p data-bn="চুম্বকের চারপাশে ক্ষেত্ররেখার দিক এবং কম্পাসের সূচের আচরণ পরীক্ষা করো।" data-en="Explore field-line direction around a magnet and the behaviour of a compass needle.">চুম্বকের চারপাশে ক্ষেত্ররেখার দিক এবং কম্পাসের সূচের আচরণ পরীক্ষা করো।</p><a class="text-link" href="https://phet.colorado.edu/en/simulations/magnet-and-compass" target="_blank" rel="noopener">Open PhET practical ↗</a></article>
+  <article class="card"><div class="card-top"><div class="icon">⚗</div><span class="tag">CHEMISTRY</span></div><h3 data-bn="অণুর 3D গঠন" data-en="3D molecular structures">অণুর 3D গঠন</h3><p data-bn="মিথেন, পানি ও অ্যামোনিয়ার মতো অণুর জ্যামিতি ঘুরিয়ে দেখো; বন্ধন-কোণ ও lone pair-এর ভূমিকা বোঝো।" data-en="Rotate molecules such as methane, water, and ammonia; examine bond angles and lone pairs.">মিথেন, পানি ও অ্যামোনিয়ার মতো অণুর জ্যামিতি ঘুরিয়ে দেখো; বন্ধন-কোণ ও lone pair-এর ভূমিকা বোঝো।</p><a class="text-link" href="https://molview.org/" target="_blank" rel="noopener">Open MolView 3D ↗</a></article>
+  <article class="card"><div class="card-top"><div class="icon">🧬</div><span class="tag">BIOLOGY</span></div><h3 data-bn="DNA ও প্রোটিনের কাঠামো" data-en="DNA & protein structures">DNA ও প্রোটিনের কাঠামো</h3><p data-bn="নিউক্লিক অ্যাসিড ও প্রোটিনের প্রকাশিত কাঠামো খুঁজে 3D ভিউয়ারে ঘুরিয়ে দেখো।" data-en="Find published nucleic-acid and protein structures and inspect them in a 3D viewer.">নিউক্লিক অ্যাসিড ও প্রোটিনের প্রকাশিত কাঠামো খুঁজে 3D ভিউয়ারে ঘুরিয়ে দেখো।</p><a class="text-link" href="https://www.rcsb.org/" target="_blank" rel="noopener">Open Protein Data Bank ↗</a></article>
+  <article class="card"><div class="card-top"><div class="icon">🪐</div><span class="tag">ASTRONOMY</span></div><h3 data-bn="সৌরজগৎ ও কক্ষপথ" data-en="Solar system & orbits">সৌরজগৎ ও কক্ষপথ</h3><p data-bn="গ্রহ, উপগ্রহ এবং মহাকাশযানের কক্ষপথের ইন্টারঅ্যাকটিভ ভিজ্যুয়াল দেখো।" data-en="Explore interactive views of planetary, moon, and spacecraft orbits.">গ্রহ, উপগ্রহ এবং মহাকাশযানের কক্ষপথের ইন্টারঅ্যাকটিভ ভিজ্যুয়াল দেখো।</p><a class="text-link" href="https://eyes.nasa.gov/" target="_blank" rel="noopener">Open NASA Eyes ↗</a></article>
+  <article class="card"><div class="card-top"><div class="icon">〰</div><span class="tag">WAVES</span></div><h3 data-bn="তরঙ্গ ও হস্তক্ষেপ" data-en="Waves & interference">তরঙ্গ ও হস্তক্ষেপ</h3><p data-bn="গঠনমূলক ও ধ্বংসাত্মক হস্তক্ষেপ, তরঙ্গদৈর্ঘ্য এবং কম্পাঙ্কের প্রভাব অন্বেষণ করো।" data-en="Explore constructive and destructive interference, wavelength, and frequency.">গঠনমূলক ও ধ্বংসাত্মক হস্তক্ষেপ, তরঙ্গদৈর্ঘ্য এবং কম্পাঙ্কের প্রভাব অন্বেষণ করো।</p><a class="text-link" href="https://phet.colorado.edu/en/simulations/wave-interference" target="_blank" rel="noopener">Open wave simulation ↗</a></article>
+  <article class="card"><div class="card-top"><div class="icon">🧪</div><span class="tag">LAB SAFETY</span></div><h3 data-bn="অ্যাসিড-বেস ও pH" data-en="Acids, bases & pH">অ্যাসিড-বেস ও pH</h3><p data-bn="pH স্কেল, দ্রবণের ঘনত্ব এবং নির্দেশকের রঙের পরিবর্তন ভার্চুয়ালি পরীক্ষা করো।" data-en="Explore the pH scale, solution concentration, and indicator colour changes virtually.">pH স্কেল, দ্রবণের ঘনত্ব এবং নির্দেশকের রঙের পরিবর্তন ভার্চুয়ালি পরীক্ষা করো।</p><a class="text-link" href="https://phet.colorado.edu/en/simulations/ph-scale" target="_blank" rel="noopener">Open pH lab ↗</a></article>
+ </div>
+</section>
 
-    <!-- Interactive Practicals & 3D Simulations Section -->
-    <section id="practicals">
-        <h2 class="section-title">থ্রি-ডি প্র্যাকটিক্যাল ও সিমুলেশন ল্যাব (২০০+ মডিউল)</h2>
-        <p class="section-desc">প্রতিটি বিষয়ে রয়েছে ৫০টিরও বেশি থ্রি-ডি ল্যাব সিমুলেশন মডিউল, যা নিখুঁতভাবে বৈজ্ঞানিক ল্যাবরেটরি পরীক্ষা প্রদর্শন করে।</p>
-        
-        <div class="grid-container">
-            <!-- Physics Practical -->
-            <div class="card">
-                <div class="badge">ফিজিক্স প্র্যাকটিক্যাল (মডিউল ১-৫০/৫০+)</div>
-                <div class="simulation-box">
-                    <i class="fa-solid fa-atom fa-spin" style="font-size: 2.5rem; color: var(--accent-color);"></i>
-                    <div class="simulation-text">কোয়ান্টাম হারমোনিক অসিলেটর থ্রি-ডি সিমুলেশন ইঞ্জিন</div>
-                </div>
-                <h3>কোয়ান্টাম হারমোনিক অসিলেটর ও এনার্জি লেভেল</h3>
-                <p><strong>বিস্তারিত তত্ত্ব ও কার্যপদ্ধতি:</strong> কণার শক্তি কোয়ান্টাইজড হয় ($E_n = (n + \frac{1}{2})\hbar\omega$)। থ্রি-ডি সিমুলেশনে ওয়েভ ফাংশনের বিস্তার এবং সম্ভাব্যতা ঘনত্ব নিখুঁতভাবে দেখানো হয়েছে।</p>
-            </div>
 
-            <!-- Chemistry Practical -->
-            <div class="card">
-                <div class="badge">কেমিস্ট্রি প্র্যাকটিক্যাল (মডিউল ১-৫০/৫০+)</div>
-                <div class="simulation-box">
-                    <i class="fa-solid fa-flask-vial fa-bounce" style="font-size: 2.5rem; color: var(--accent-color);"></i>
-                    <div class="simulation-text">VSEPR মলিকুলার জ্যামিতিক থ্রি-ডি মডেল</div>
-                </div>
-                <h3>VSEPR থিওরি ও অণুর ত্রিমাত্রিক গঠন</h3>
-                <p><strong>বিস্তারিত তত্ত্ব ও কার্যপদ্ধতি:</strong> ইলেকট্রন জোড়ের পারস্পরিক বিকর্ষণের ফলে পরমাণুগুলো স্থানিকভাবে এমন কোণ তৈরি করে যাতে ন্যূনতম শক্তি বজায় থাকে (যেমন মিথেনের ১০৯.৫° কোণ)।</p>
-            </div>
+<section id="visuals">
+ <div class="section-head"><div><div class="kicker">03 / VISUAL EXPLORER</div><h2 data-bn="দেখে শেখো: সিমুলেশন ও ভিডিও" data-en="Learn visually: simulations & videos">দেখে শেখো: সিমুলেশন ও ভিডিও</h2><p data-bn="এখানে নির্ভরযোগ্য শিক্ষামূলক সিমুলেশন, বাস্তব কণার সংঘর্ষের ভিজ্যুয়ালাইজেশন এবং বিজ্ঞান ভিডিওর সংগ্রহ দেওয়া হলো। লিংক খুললে সংশ্লিষ্ট প্রতিষ্ঠানের সাইটে যাবে।" data-en="Explore trusted educational simulations, real particle-collision visualisations, and science-video collections. Links open the original providers.">এখানে নির্ভরযোগ্য শিক্ষামূলক সিমুলেশন, বাস্তব কণার সংঘর্ষের ভিজ্যুয়ালাইজেশন এবং বিজ্ঞান ভিডিওর সংগ্রহ দেওয়া হলো। লিংক খুললে সংশ্লিষ্ট প্রতিষ্ঠানের সাইটে যাবে।</p></div></div>
+ <div class="grid video-grid">
+  <article class="card"><div class="video-thumb"><span class="play">▶</span></div><div class="video-body"><span class="tag">PHET • INTERACTIVE</span><h3 data-bn="কোয়ান্টাম, বল ও তরঙ্গ" data-en="Quantum, forces & waves">কোয়ান্টাম, বল ও তরঙ্গ</h3><p data-bn="নিজে ভেরিয়েবল বদলে ফিজিক্সের ধারণা পরীক্ষা করো।" data-en="Change variables yourself to test physics concepts.">নিজে ভেরিয়েবল বদলে ফিজিক্সের ধারণা পরীক্ষা করো।</p><a class="text-link" href="https://phet.colorado.edu/en/simulations/filter?subjects=physics&type=html" target="_blank" rel="noopener">Open interactive labs ↗</a></div></article>
+  <article class="card"><div class="video-thumb" style="background:radial-gradient(circle at 50% 45%,#3d246e,#15163e 55%,#070b1b)"><span class="play">▶</span></div><div class="video-body"><span class="tag">CERN • REAL DATA</span><h3 data-bn="কণার সংঘর্ষের ইভেন্ট ডিসপ্লে" data-en="Particle collision event displays">কণার সংঘর্ষের ইভেন্ট ডিসপ্লে</h3><p data-bn="Higgs boson-সংক্রান্ত প্রার্থী সংঘর্ষের ইভেন্ট দেখো এবং CERN-এর ডেটা-গাইড অনুসরণ করো।" data-en="View candidate events related to the Higgs boson and follow CERN's data guide.">Higgs boson-সংক্রান্ত প্রার্থী সংঘর্ষের ইভেন্ট দেখো এবং CERN-এর ডেটা-গাইড অনুসরণ করো।</p><a class="text-link" href="https://opendata.web.cern.ch/docs/cms-guide-for-education" target="_blank" rel="noopener">Open CERN visualisation guide ↗</a></div></article>
+  <article class="card"><div class="video-thumb" style="background:radial-gradient(circle at 50% 45%,#145e70,#102443 55%,#070b1b)"><span class="play">▶</span></div><div class="video-body"><span class="tag">NASA • SPACE</span><h3 data-bn="মহাকাশের ছবি ও আবিষ্কার" data-en="Space imagery & discoveries">মহাকাশের ছবি ও আবিষ্কার</h3><p data-bn="গ্রহ, নক্ষত্র, গ্যালাক্সি এবং চলমান মিশন সম্পর্কে NASA-র বিজ্ঞান কনটেন্ট অন্বেষণ করো।" data-en="Explore NASA science content about planets, stars, galaxies, and missions.">গ্রহ, নক্ষত্র, গ্যালাক্সি এবং চলমান মিশন সম্পর্কে NASA-র বিজ্ঞান কনটেন্ট অন্বেষণ করো।</p><a class="text-link" href="https://science.nasa.gov/" target="_blank" rel="noopener">Explore NASA Science ↗</a></div></article>
+ </div>
+ <div class="notice"><strong data-bn="স্বচ্ছতা নোট:" data-en="Transparency note:">স্বচ্ছতা নোট:</strong> <span data-bn="এই কার্ডগুলো বিশ্বস্ত বাইরের রিসোর্সে নিয়ে যায়; এগুলো নিজস্ব ভিডিও বা নিজস্ব 3D গবেষণার দাবি নয়। পরবর্তীতে চাইলে নিজের তৈরি WebGL/Three.js ল্যাব ও এমবেড করা ভিডিও যুক্ত করা যাবে।" data-en="These cards link to trusted external resources; they are not claims of original videos or original 3D research. Custom WebGL/Three.js labs and embedded videos can be added later.">এই কার্ডগুলো বিশ্বস্ত বাইরের রিসোর্সে নিয়ে যায়; এগুলো নিজস্ব ভিডিও বা নিজস্ব 3D গবেষণার দাবি নয়। পরবর্তীতে চাইলে নিজের তৈরি WebGL/Three.js ল্যাব ও এমবেড করা ভিডিও যুক্ত করা যাবে।</span></div>
+</section>
 
-            <!-- Biology Practical -->
-            <div class="card">
-                <div class="badge">বায়োলজি প্র্যাকটিক্যাল (মডিউল ১-৫০/৫০+)</div>
-                <div class="simulation-box">
-                    <i class="fa-solid fa-dna fa-spin" style="font-size: 2.5rem; color: var(--accent-color);"></i>
-                    <div class="simulation-text">ডিএনএ রেপ্লিকেশন ও পলিমারেজ থ্রি-ডি ইঞ্জিন</div>
-                </div>
-                <h3>ডিএনএ রেপ্লিকেশন ও পলিবারেজ এনজাইমের গতি</h3>
-                <p><strong>বিস্তারিত তত্ত্ব ও কার্যপদ্ধতি:</strong> হেলিকেস এনজাইম ডিএনএর ডাবল হেলিক্স ডি-কয়েল করে এবং ডিএনএ পলিমারেজ ফাইব প্রাইম থেকে থ্রি প্রাইম ডিরেকশনে নতুন স্ট্র্যান্ড সিন্থেসিস করে।</p>
-            </div>
+<section id="charts">
+ <div class="section-head"><div><div class="kicker">04 / CHARTS & EVIDENCE</div><h2 data-bn="চার্টে বিজ্ঞান, যুক্তিতে প্রমাণ" data-en="Science in charts, evidence in reasoning">চার্টে বিজ্ঞান, যুক্তিতে প্রমাণ</h2><p data-bn="ভিজ্যুয়াল চার্ট ধারণা বোঝাতে সাহায্য করে; কিন্তু চার্টের অর্থ বুঝতে অক্ষ, একক, অনুমান ও ডেটার উৎস জানা জরুরি।" data-en="Charts make concepts visible, but axes, units, assumptions, and data sources matter when interpreting them.">ভিজ্যুয়াল চার্ট ধারণা বোঝাতে সাহায্য করে; কিন্তু চার্টের অর্থ বুঝতে অক্ষ, একক, অনুমান ও ডেটার উৎস জানা জরুরি।</p></div></div>
+ <div class="chart-grid">
+  <article class="card chart-card"><div class="card-top"><h3 data-bn="বর্গের ক্ষেত্রফল" data-en="Area of a square">বর্গের ক্ষেত্রফল</h3><span class="tag">GEOMETRY</span></div><p data-bn="বাহু দ্বিগুণ হলে ক্ষেত্রফল চার গুণ হয়: A = s²।" data-en="Doubling the side length makes the area four times larger: A = s².">বাহু দ্বিগুণ হলে ক্ষেত্রফল চার গুণ হয়: A = s²।</p><div class="chart-wrap"><canvas id="areaChart" role="img" aria-label="Square area grows with side length"></canvas></div><div class="formula">A = s²</div></article>
+  <article class="card chart-card"><div class="card-top"><h3 data-bn="আদর্শ সরল দোলকের সময়কাল" data-en="Ideal simple pendulum period">আদর্শ সরল দোলকের সময়কাল</h3><span class="tag">PHYSICS</span></div><p data-bn="ছোট কোণের অনুমানে T ≈ 2π√(L/g); দৈর্ঘ্য বাড়লে সময়কাল বাড়ে।" data-en="For small angles, T ≈ 2π√(L/g); period increases with length.">ছোট কোণের অনুমানে T ≈ 2π√(L/g); দৈর্ঘ্য বাড়লে সময়কাল বাড়ে।</p><div class="chart-wrap"><canvas id="pendulumChart" role="img" aria-label="Pendulum period by length"></canvas></div><div class="formula">T ≈ 2π√(L/g), with g = 9.81 m/s²</div></article>
+ </div>
+ <div class="notice"><strong data-bn="ডেটা সম্পর্কে:" data-en="About the data:">ডেটা সম্পর্কে:</strong> <span data-bn="এই দুই চার্ট গাণিতিক সূত্র থেকে তৈরি মডেল-ডেটা; এগুলো কোনো গবেষণাগারের পরিমাপ বা প্রকাশিত গবেষণার ফল বলে দাবি করা হচ্ছে না।" data-en="These charts use model values calculated from mathematical formulas; they are not presented as lab measurements or published research findings.">এই দুই চার্ট গাণিতিক সূত্র থেকে তৈরি মডেল-ডেটা; এগুলো কোনো গবেষণাগারের পরিমাপ বা প্রকাশিত গবেষণার ফল বলে দাবি করা হচ্ছে না।</span></div>
+</section>
 
-            <!-- Mathematics Practical -->
-            <div class="card">
-                <div class="badge">ম্যাথমেটিক্স প্র্যাকটিক্যাল (মডিউল ১-৫০/৫০+)</div>
-                <div class="simulation-box">
-                    <i class="fa-solid fa-calculator fa-pulse" style="font-size: 2.5rem; color: var(--accent-color);"></i>
-                    <div class="simulation-text">মাল্টিভ্যারিয়েবল ক্যালকুলাস থ্রি-ডি সারফেস প্লট</div>
-                </div>
-                <h3>মাল্টিভ্যারিয়েবল ক্যালকুলাস ও পার্শিয়াল ডেরিভেটিভ</h3>
-                <p><strong>বিস্তারিত তত্ত্ব ও কার্যপদ্ধতি:</strong> থ্রি-ডি কার্ভ ও সারফেসে স্পর্শক তল (Tangent Plane) এবং গ্রেডিয়েন্টের সাহায্যে সর্বোচ্চ পরিবর্তনের হার নির্ণয় করা।</p>
-            </div>
-        </div>
-    </section>
+<section id="research">
+ <div class="section-head"><div><div class="kicker">05 / RESEARCH GATEWAY</div><h2 data-bn="বিশ্বমানের গবেষণার দরজা" data-en="Gateway to world-class research">বিশ্বমানের গবেষণার দরজা</h2><p data-bn="বিশ্ববিদ্যালয় ও গবেষণা প্রতিষ্ঠানের আসল পেপার, প্রিপ্রিন্ট এবং ওপেন ডেটা খুঁজে পড়ার জন্য সরাসরি উৎস। প্রতিটি লিংক বাইরের প্রতিষ্ঠানের।" data-en="Direct portals for original papers, preprints, and open datasets from research institutions. Each link belongs to the external provider.">বিশ্ববিদ্যালয় ও গবেষণা প্রতিষ্ঠানের আসল পেপার, প্রিপ্রিন্ট এবং ওপেন ডেটা খুঁজে পড়ার জন্য সরাসরি উৎস। প্রতিটি লিংক বাইরের প্রতিষ্ঠানের।</p></div></div>
+ <div class="grid research-grid">
+  <article class="card research-item"><div class="icon">◉</div><div><div class="source-label">CERN • Particle Physics</div><h3>CERN Open Data</h3><p data-bn="LHC পরীক্ষার উন্মুক্ত ডেটা, ইভেন্ট ডিসপ্লে এবং ডেটা বিশ্লেষণের শিক্ষামূলক গাইড।" data-en="Open data from LHC experiments, event displays, and guides to data analysis.">LHC পরীক্ষার উন্মুক্ত ডেটা, ইভেন্ট ডিসপ্লে এবং ডেটা বিশ্লেষণের শিক্ষামূলক গাইড।</p><a class="text-link" href="https://opendata.web.cern.ch/" target="_blank" rel="noopener">Open data portal ↗</a></div></article>
+  <article class="card research-item"><div class="icon">⌘</div><div><div class="source-label">arXiv • Preprints</div><h3>arXiv Research Archive</h3><p data-bn="পদার্থবিদ্যা, গণিত, কম্পিউটার বিজ্ঞান এবং পরিমাণগত জীববিজ্ঞানের প্রিপ্রিন্ট। মনে রাখবে, সব পেপার পিয়ার-রিভিউড নয়।" data-en="Preprints in physics, mathematics, computer science, and quantitative biology. Note: not every paper is peer-reviewed.">পদার্থবিদ্যা, গণিত, কম্পিউটার বিজ্ঞান এবং পরিমাণগত জীববিজ্ঞানের প্রিপ্রিন্ট। মনে রাখবে, সব পেপার পিয়ার-রিভিউড নয়।</p><a class="text-link" href="https://arxiv.org/" target="_blank" rel="noopener">Search papers ↗</a></div></article>
+  <article class="card research-item"><div class="icon">⌬</div><div><div class="source-label">MIT • Open Learning</div><h3>MIT OpenCourseWare</h3><p data-bn="বিশ্ববিদ্যালয়-স্তরের লেকচার নোট, অ্যাসাইনমেন্ট ও বিষয়ভিত্তিক শিক্ষাসামগ্রী।" data-en="University-level lecture notes, assignments, and subject learning materials.">বিশ্ববিদ্যালয়-স্তরের লেকচার নোট, অ্যাসাইনমেন্ট ও বিষয়ভিত্তিক শিক্ষাসামগ্রী।</p><a class="text-link" href="https://ocw.mit.edu/" target="_blank" rel="noopener">Browse MIT OCW ↗</a></div></article>
+  <article class="card research-item"><div class="icon">✧</div><div><div class="source-label">NASA • Space Science</div><h3>NASA Science</h3><p data-bn="গ্রহবিজ্ঞান, জ্যোতির্বিজ্ঞান, পৃথিবী বিজ্ঞান এবং মহাকাশ মিশনের প্রকাশ্য গবেষণা ও ব্যাখ্যা।" data-en="Public research and explainers on planetary science, astronomy, Earth science, and missions.">গ্রহবিজ্ঞান, জ্যোতির্বিজ্ঞান, পৃথিবী বিজ্ঞান এবং মহাকাশ মিশনের প্রকাশ্য গবেষণা ও ব্যাখ্যা।</p><a class="text-link" href="https://science.nasa.gov/" target="_blank" rel="noopener">Explore NASA ↗</a></div></article>
+  <article class="card research-item"><div class="icon">∿</div><div><div class="source-label">Stanford • Research</div><h3>Stanford Research</h3><p data-bn="বিভিন্ন বিভাগের গবেষণা, ল্যাব এবং প্রকাশনার তথ্য খোঁজার প্রবেশদ্বার।" data-en="A gateway to research news, laboratories, and publications across departments.">বিভিন্ন বিভাগের গবেষণা, ল্যাব এবং প্রকাশনার তথ্য খোঁজার প্রবেশদ্বার।</p><a class="text-link" href="https://research.stanford.edu/" target="_blank" rel="noopener">Explore Stanford ↗</a></div></article>
+  <article class="card research-item"><div class="icon">⌖</div><div><div class="source-label">PubMed • Life Sciences</div><h3>PubMed Research Database</h3><p data-bn="বায়োমেডিসিন ও জীবনবিজ্ঞানের পেপার খোঁজো; লেখক, জার্নাল, প্রকাশনার বছর এবং DOI যাচাই করো।" data-en="Search biomedical and life-science papers; verify authors, journals, publication dates, and DOIs.">বায়োমেডিসিন ও জীবনবিজ্ঞানের পেপার খোঁজো; লেখক, জার্নাল, প্রকাশনার বছর এবং DOI যাচাই করো।</p><a class="text-link" href="https://pubmed.ncbi.nlm.nih.gov/" target="_blank" rel="noopener">Search PubMed ↗</a></div></article>
+ </div>
+ <div class="notice"><strong data-bn="গবেষণার সততা:" data-en="Research integrity:">গবেষণার সততা:</strong> <span data-bn="এই পোর্টালগুলোতে প্রতিষ্ঠানের নিজস্ব প্রকাশনা বা গবেষণা খুঁজে পাবে। এই সাইটে কোনো পেপারকে নিজস্ব গবেষণা হিসেবে দেখানো হচ্ছে না। কোনো ফলাফল উদ্ধৃত করার আগে মূল পেপার, লেখক, প্রকাশনার তথ্য ও পদ্ধতি যাচাই করো।" data-en="These portals help you find original institutional publications. No paper is represented here as original research by this site. Before citing a result, verify the original paper, authors, publication details, and methods.">এই পোর্টালগুলোতে প্রতিষ্ঠানের নিজস্ব প্রকাশনা বা গবেষণা খুঁজে পাবে। এই সাইটে কোনো পেপারকে নিজস্ব গবেষণা হিসেবে দেখানো হচ্ছে না। কোনো ফলাফল উদ্ধৃত করার আগে মূল পেপার, লেখক, প্রকাশনার তথ্য ও পদ্ধতি যাচাই করো।</span></div>
+</section>
 
-    <!-- Research Notes & Papers Section -->
-    <section id="research">
-        <h2 class="section-title">বিশ্বমানের প্রাতিষ্ঠানিক গবেষণা পেপারস (৩০+ পেপার)</h2>
-        <p class="section-desc">CERN, MIT, Caltech, Stanford এবং প্রিন্সটনের গবেষণার ওপর ভিত্তি করে তৈরি গভীর প্রাতিষ্ঠানিক নোটস।</p>
-        
-        <div class="grid-container">
-            <div class="card">
-                <div class="badge">CERN | ফিজিক্স রিসার্চ (১/৩০)</div>
-                <h3>হিগস ফিল্ড ইন্টারঅ্যাকশন ও ভর সৃষ্টি</h3>
-                <p><strong>বিস্তারিত সমীক্ষা:</strong> স্ট্যান্ডার্ড মডেলের ইরেকট্রোস্বাতন্ত্র্য ভাঙার প্রক্রিয়ায় কণাগুলো কীভাবে শূন্যস্থানে থাকা হিগস ফিল্ডের সাথে কাপলিং কনস্ট্যান্টের মাধ্যমে ভর অর্জন করে তার গাণিতিক ও থ্রি-ডি প্রমাণ।</p>
-            </div>
-            <div class="card">
-                <div class="badge">HARVARD/MIT | বায়োলজি রিসার্চ (২/৩০)</div>
-                <h3>CRISPR-Cas13 RNA এডিটিং ডাইনামিক্স</h3>
-                <p><strong>বিস্তারিত সমীক্ষা:</strong> Cas13 এনজাইমের গাইড RNA এর সাথে নির্দিষ্ট সিঙ্গল স্ট্র্যান্ড RNA চেনার কৌশল এবং থেরাপিউটিক ট্রান্সক্রিপ্টোম মডিফিকেশনের প্রিসিশন মেকানিজম।</p>
-            </div>
-            <div class="card">
-                <div class="badge">PRINCETON | ম্যাথ রিসার্চ (৩/৩০)</div>
-                <h3>রিম্যান হাইপোথিসিস ও প্রাইম ডিস্ট্রিবিউশন</h3>
-                <p><strong>বিস্তারিত সমীক্ষা:</strong> রিম্যান জেটা ফাংশনের অবাস্তব শূন্যস্থানগুলোর সমালোচনামূলক লাইন ($Re(s) = \frac{1}{2}$) এবং কোয়ান্টাম হ্যামিল্টোনিয়ানের শক্তির স্তরের মধ্যে সংযোগ।</p>
-            </div>
-        </div>
-    </section>
+<section id="mysteries">
+ <div class="section-head"><div><div class="kicker">06 / THE MYSTERY FILES</div><h2 data-bn="মহাবিশ্বের বিস্ময়কর প্রশ্ন" data-en="The universe's astonishing questions">মহাবিশ্বের বিস্ময়কর প্রশ্ন</h2><p data-bn="কার্ডে চাপ দাও—সংক্ষিপ্ত ব্যাখ্যা খুলবে। রহস্যময় মানেই অতিপ্রাকৃত নয়; কখনও উত্তর জানা, কখনও গবেষণা এখনও চলছে।" data-en="Tap a card to reveal a short explanation. Mysterious does not mean supernatural: some answers are known, while others remain open questions.">কার্ডে চাপ দাও—সংক্ষিপ্ত ব্যাখ্যা খুলবে। রহস্যময় মানেই অতিপ্রাকৃত নয়; কখনও উত্তর জানা, কখনও গবেষণা এখনও চলছে।</p></div></div>
+ <div class="grid fact-grid">
+  <button class="card fact-card" type="button" aria-expanded="false"><div class="card-top"><div class="icon">🌑</div><span class="tag">COSMOLOGY</span></div><h3 data-bn="ডার্ক ম্যাটার আসলে কী?" data-en="What is dark matter?">ডার্ক ম্যাটার আসলে কী?</h3><p data-bn="মহাকর্ষীয় প্রভাব দেখা যায়, কিন্তু প্রকৃতি এখনও অজানা।" data-en="Its gravitational effects are observed, but its nature remains unknown.">মহাকর্ষীয় প্রভাব দেখা যায়, কিন্তু প্রকৃতি এখনও অজানা।</p><span class="fact-reveal" data-bn="ব্যাখ্যা দেখো ↓" data-en="Reveal explanation ↓">ব্যাখ্যা দেখো ↓</span><div class="fact-detail" data-bn="গ্যালাক্সি ও বৃহৎ মহাজাগতিক কাঠামোর গতিবিধি থেকে অদৃশ্য ভরের প্রমাণ পাওয়া যায়। ডার্ক ম্যাটার কী কণা দিয়ে তৈরি, তা এখনও নিশ্চিতভাবে জানা যায়নি।" data-en="Galaxy motions and large-scale structure indicate unseen mass. Scientists still do not know with certainty what particles, if any, make up dark matter.">গ্যালাক্সি ও বৃহৎ মহাজাগতিক কাঠামোর গতিবিধি থেকে অদৃশ্য ভরের প্রমাণ পাওয়া যায়। ডার্ক ম্যাটার কী কণা দিয়ে তৈরি, তা এখনও নিশ্চিতভাবে জানা যায়নি।</div></button>
+  <button class="card fact-card" type="button" aria-expanded="false"><div class="card-top"><div class="icon">⚛</div><span class="tag">QUANTUM</span></div><h3 data-bn="কোয়ান্টাম সুপারপজিশন" data-en="Quantum superposition">কোয়ান্টাম সুপারপজিশন</h3><p data-bn="ক্ষুদ্র কণার অবস্থা আমাদের দৈনন্দিন অভিজ্ঞতার মতো নয়।" data-en="The states of tiny particles do not behave like everyday objects.">ক্ষুদ্র কণার অবস্থা আমাদের দৈনন্দিন অভিজ্ঞতার মতো নয়।</p><span class="fact-reveal" data-bn="ব্যাখ্যা দেখো ↓" data-en="Reveal explanation ↓">ব্যাখ্যা দেখো ↓</span><div class="fact-detail" data-bn="কোয়ান্টাম তত্ত্বে একটি সিস্টেম পরিমাপের আগে একাধিক সম্ভাব্য অবস্থার সুপারপজিশনে থাকতে পারে। পরিমাপের ফলাফল সম্ভাব্যতা দিয়ে বর্ণনা করা হয়; ‘মানুষ তাকালেই বাস্তবতা তৈরি হয়’—এমন সরল দাবি সঠিক নয়।" data-en="Quantum theory allows a system to be in a superposition of possible states before measurement. Outcomes are described probabilistically; the simplistic claim that human observation creates reality is not established.">কোয়ান্টাম তত্ত্বে একটি সিস্টেম পরিমাপের আগে একাধিক সম্ভাব্য অবস্থার সুপারপজিশনে থাকতে পারে। পরিমাপের ফলাফল সম্ভাব্যতা দিয়ে বর্ণনা করা হয়; ‘মানুষ তাকালেই বাস্তবতা তৈরি হয়’—এমন সরল দাবি সঠিক নয়।</div></button>
+  <button class="card fact-card" type="button" aria-expanded="false"><div class="card-top"><div class="icon">🧬</div><span class="tag">BIOLOGY</span></div><h3 data-bn="একটি কোষে DNA কতটা?" data-en="How much DNA is in one cell?">একটি কোষে DNA কতটা?</h3><p data-bn="মানবদেহের অধিকাংশ নিউক্লিয়েটেড কোষে DNA থাকে অত্যন্ত দীর্ঘ অণু হিসেবে।" data-en="Most nucleated human cells contain DNA molecules that are remarkably long.">মানবদেহের অধিকাংশ নিউক্লিয়েটেড কোষে DNA থাকে অত্যন্ত দীর্ঘ অণু হিসেবে।</p><span class="fact-reveal" data-bn="ব্যাখ্যা দেখো ↓" data-en="Reveal explanation ↓">ব্যাখ্যা দেখো ↓</span><div class="fact-detail" data-bn="একটি ডিপ্লয়েড মানব কোষের নিউক্লিয়াসে DNA সোজা করে টানলে মোট দৈর্ঘ্য আনুমানিক ২ মিটার হতে পারে। কোষের ধরন, DNA-র অবস্থা ও পরিমাপের অনুমানের ওপর মানটি নির্ভর করে।" data-en="If stretched out, the DNA in a diploid human cell nucleus is roughly 2 metres long. The estimate depends on cell type, DNA state, and measurement assumptions.">একটি ডিপ্লয়েড মানব কোষের নিউক্লিয়াসে DNA সোজা করে টানলে মোট দৈর্ঘ্য আনুমানিক ২ মিটার হতে পারে। কোষের ধরন, DNA-র অবস্থা ও পরিমাপের অনুমানের ওপর মানটি নির্ভর করে।</div></button>
+  <button class="card fact-card" type="button" aria-expanded="false"><div class="card-top"><div class="icon">🕳</div><span class="tag">ASTROPHYSICS</span></div><h3 data-bn="ব্ল্যাক হোলের সীমানা" data-en="The edge of a black hole">ব্ল্যাক হোলের সীমানা</h3><p data-bn="ইভেন্ট হরাইজন কোনো শক্ত দেয়াল নয়—এটি একটি সীমা।" data-en="The event horizon is not a solid surface—it is a boundary.">ইভেন্ট হরাইজন কোনো শক্ত দেয়াল নয়—এটি একটি সীমা।</p><span class="fact-reveal" data-bn="ব্যাখ্যা দেখো ↓" data-en="Reveal explanation ↓">ব্যাখ্যা দেখো ↓</span><div class="fact-detail" data-bn="ইভেন্ট হরাইজনের ভেতর থেকে আলোও বাইরে আসতে পারে না। দূর থেকে পর্যবেক্ষকের কাছে ব্ল্যাক হোলের কাছাকাছি ঘড়ির সংকেতের আচরণ আপেক্ষিকতার প্রভাব দেখায়; বাস্তব চিত্র পেতে সাধারণ আপেক্ষিকতার মডেল দরকার।" data-en="Light cannot escape from inside the event horizon. Signals from near a black hole show relativistic effects, and accurate descriptions require general-relativity models.">ইভেন্ট হরাইজনের ভেতর থেকে আলোও বাইরে আসতে পারে না। দূর থেকে পর্যবেক্ষকের কাছে ব্ল্যাক হোলের কাছাকাছি ঘড়ির সংকেতের আচরণ আপেক্ষিকতার প্রভাব দেখায়; বাস্তব চিত্র পেতে সাধারণ আপেক্ষিকতার মডেল দরকার।</div></button>
+  <button class="card fact-card" type="button" aria-expanded="false"><div class="card-top"><div class="icon">🪐</div><span class="tag">EXOPLANETS</span></div><h3 data-bn="পৃথিবীর মতো অন্য গ্রহ?" data-en="Other worlds like Earth?">পৃথিবীর মতো অন্য গ্রহ?</h3><p data-bn="সৌরজগতের বাইরেও হাজার হাজার এক্সোপ্ল্যানেট শনাক্ত হয়েছে।" data-en="Thousands of exoplanets have been identified beyond our Solar System.">সৌরজগতের বাইরেও হাজার হাজার এক্সোপ্ল্যানেট শনাক্ত হয়েছে।</p><span class="fact-reveal" data-bn="ব্যাখ্যা দেখো ↓" data-en="Reveal explanation ↓">ব্যাখ্যা দেখো ↓</span><div class="fact-detail" data-bn="ট্রানজিট ও রেডিয়াল-ভেলোসিটি পদ্ধতিতে অনেক এক্সোপ্ল্যানেট শনাক্ত করা হয়েছে। কোনো গ্রহ বাসযোগ্য অঞ্চলে থাকলেই সেখানে প্রাণ আছে—এমন প্রমাণ হয় না।" data-en="Many exoplanets are detected through transit and radial-velocity methods. Being in a habitable zone does not prove that a planet hosts life.">ট্রানজিট ও রেডিয়াল-ভেলোসিটি পদ্ধতিতে অনেক এক্সোপ্ল্যানেট শনাক্ত করা হয়েছে। কোনো গ্রহ বাসযোগ্য অঞ্চলে থাকলেই সেখানে প্রাণ আছে—এমন প্রমাণ হয় না।</div></button>
+  <button class="card fact-card" type="button" aria-expanded="false"><div class="card-top"><div class="icon">〰</div><span class="tag">MATHEMATICS</span></div><h3 data-bn="π-এর দশমিক কি কখনও শেষ হয়?" data-en="Does the decimal expansion of π end?">π-এর দশমিক কি কখনও শেষ হয়?</h3><p data-bn="π একটি অমূলদ সংখ্যা; এর দশমিক বিস্তার অসীম এবং পুনরাবৃত্তিহীন।" data-en="π is irrational; its decimal expansion is infinite and non-repeating.">π একটি অমূলদ সংখ্যা; এর দশমিক বিস্তার অসীম এবং পুনরাবৃত্তিহীন।</p><span class="fact-reveal" data-bn="ব্যাখ্যা দেখো ↓" data-en="Reveal explanation ↓">ব্যাখ্যা দেখো ↓</span><div class="fact-detail" data-bn="অমূলদ সংখ্যাকে দুটি পূর্ণসংখ্যার অনুপাত হিসেবে প্রকাশ করা যায় না। তাই π-এর দশমিক রূপ থামে না এবং কোনো নির্দিষ্ট ব্লক অসীমভাবে পুনরাবৃত্তি করে না।" data-en="An irrational number cannot be expressed as a ratio of two integers. Therefore π's decimal expansion neither terminates nor repeats in a fixed cycle.">অমূলদ সংখ্যাকে দুটি পূর্ণসংখ্যার অনুপাত হিসেবে প্রকাশ করা যায় না। তাই π-এর দশমিক রূপ থামে না এবং কোনো নির্দিষ্ট ব্লক অসীমভাবে পুনরাবৃত্তি করে না।</div></button>
+ </div>
+</section>
+</main>
+<footer><div class="footer-brand">RISHI SCINIVERSE</div><p class="founder"><span data-bn="প্রতিষ্ঠাতা:" data-en="Founder:">প্রতিষ্ঠাতা:</span> <strong>Souparno Roy</strong></p><p style="font-size:.8rem;margin-top:12px">© <span id="year"></span> RISHI SCINIVERSE · <span data-bn="কৌতূহল থেকে আবিষ্কার" data-en="Curiosity into discovery">কৌতূহল থেকে আবিষ্কার</span></p></footer>
+<div id="toast" role="status" aria-live="polite"></div>
+<script>
+(() => {
+  const $ = (s, root=document) => root.querySelector(s);
+  const $$ = (s, root=document) => [...root.querySelectorAll(s)];
+  $('#year').textContent = new Date().getFullYear();
 
-    <!-- Science Facts Section -->
-    <section id="facts">
-        <h2 class="section-title">অজানা ও আশ্চর্যজনক বৈজ্ঞানিক তথ্য</h2>
-        <p class="section-desc">বিজ্ঞান জগতের সবচেয়ে রহস্যময় তথ্যগুলো জানতে নিচের কার্ডগুলোতে ক্লিক করুন।</p>
-        
-        <div class="grid-container">
-            <div class="card fact-trigger-card" onclick="openFactModal('কোয়ান্টাম সুপারপজিশন', 'সাবঅ্যাটমিক কণা যেমন ইলেকট্রন বা ফোটন পরিমাপ করার আগ পর্যন্ত একই সাথে সম্ভাব্য সমস্ত অবস্থায় (Superposition) অবস্থান করতে পারে। যখনই কোনো পর্যবেক্ষক বা যন্ত্র তা পরিমাপ করে, ওয়েভ ফাংশন তখন একটিমাত্র নির্দিষ্ট বাস্তবতায় ধসে পড়ে বা কোলাপ্স করে।')">
-                <i class="fa-solid fa-atom"></i>
-                <h3>কোয়ান্টাম সুপারপজিশন</h3>
-                <p>বিস্তারিত জানতে ক্লিক করুন...</p>
-            </div>
-            <div class="card fact-trigger-card" onclick="openFactModal('মানব ডিএনএর অবিশ্বাস্য দৈর্ঘ্য', 'আপনার শরীরের প্রতিটি কোষে থাকা সমস্ত ডিএনএ যদি সুতার মতো এক সারিতে খুলে লম্বালম্বি রাখা হয়, তবে তার মোট দৈর্ঘ্য হবে প্রায় ১০ বিলিয়ন মাইল—যা পৃথিবী থেকে প্লুটো এবং আবার ফিরে আসার দূরত্বের চেয়েও অনেক বেশি!')">
-                <i class="fa-solid fa-dna"></i>
-                <h3>মানব ডিএনএর দৈর্ঘ্য</h3>
-                <p>বিস্তারিত জানতে ক্লিক করুন...</p>
-            </div>
-        </div>
-    </section>
+  // Responsive mobile navigation
+  const menuBtn = $('#menuBtn'), nav = $('#navlinks');
+  menuBtn.addEventListener('click', () => {
+    const open = nav.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', String(open));
+    menuBtn.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+  });
+  $$('#navlinks a').forEach(a => a.addEventListener('click', () => {
+    nav.classList.remove('open'); menuBtn.setAttribute('aria-expanded','false');
+  }));
 
-    <!-- Fact Popup Modal -->
-    <div id="factModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeFactModal()">&times;</span>
-            <h2 id="modalTitle" style="color: var(--accent-color); margin-bottom: 15px; font-family: 'Orbitron';"></h2>
-            <p id="modalDesc" style="font-size: 1.1rem; line-height: 1.6; color: #cbd5e1;"></p>
-        </div>
-    </div>
+  // Complete Bengali/English toggle for all tagged text nodes, with original text retained in data attributes.
+  let lang = 'bn';
+  $('#langBtn').addEventListener('click', () => {
+    lang = lang === 'bn' ? 'en' : 'bn';
+    document.documentElement.lang = lang;
+    $$('[data-bn][data-en]').forEach(el => {
+      const value = el.dataset[lang];
+      if (value !== undefined) el.textContent = value;
+    });
+    $('#langBtn').textContent = lang === 'bn' ? 'EN / BN' : 'BN / EN';
+  });
 
-    <!-- Footer -->
-    <footer>
-        <h3>RISHI SCINIVERSE</h3>
-        <p>সৃষ্টিকর্তা ও প্রধান ডেভেলপার: <span class="founder">সৌপর্ণ রায় (Souparno Roy)</span></p>
-        <p style="margin-top: 15px; font-size: 0.85rem; color: #64748b;">&copy; ২০২৬ ঋষি সাইনিভার্স (RISHI SCINIVERSE)। সর্বস্বত্ব সংরক্ষিত।</p>
-    </footer>
 
-    <!-- Three.js and Interactive Scripts -->
-    <script>
-        // Three.js Background Particle Simulation
-        const container = document.getElementById('canvas-container');
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+  // Interactive Three.js practical model. Falls back gracefully if WebGL is unavailable.
+  (function init3DLab(){
+    const canvas=$('#model3d');
+    if(!canvas || !window.THREE){if(canvas){canvas.parentElement.querySelector('.stage-help').textContent='3D library unavailable. Check your internet connection.';}return;}
+    let renderer,scene,camera,root,raf=0,paused=false,speed=1,dragging=false,lastX=0,lastY=0,rotX=0,rotY=0;
+    const THREE=window.THREE;
+    try{
+      renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true,powerPreference:'low-power'});
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,1.5));
+      scene=new THREE.Scene();
+      camera=new THREE.PerspectiveCamera(42,1,.1,100);
+      camera.position.set(0,0,9);
+      scene.add(new THREE.AmbientLight(0x8daeff,1.3));
+      const light=new THREE.PointLight(0x6ef7ff,2.2,35);light.position.set(4,4,6);scene.add(light);
+      const light2=new THREE.PointLight(0xa78bfa,1.6,35);light2.position.set(-4,-2,3);scene.add(light2);
+      root=new THREE.Group();scene.add(root);
+      const mat=(color,roughness=.4,metalness=.25)=>new THREE.MeshStandardMaterial({color,roughness,metalness});
+      function sphere(parent,r,color,x=0,y=0,z=0){const m=new THREE.Mesh(new THREE.SphereGeometry(r,24,18),mat(color));m.position.set(x,y,z);parent.add(m);return m;}
+      function line(parent,points,color=0x6ef7ff,opacity=.65){const g=new THREE.BufferGeometry().setFromPoints(points);const m=new THREE.Line(g,new THREE.LineBasicMaterial({color,transparent:true,opacity}));parent.add(m);return m;}
+      function clearRoot(){while(root.children.length){const obj=root.children.pop();obj.traverse?.(n=>{n.geometry?.dispose?.();if(n.material){if(Array.isArray(n.material))n.material.forEach(m=>m.dispose?.());else n.material.dispose?.();}});}root.rotation.set(0,0,0);}
+      function ring(parent,r,color=0x6ef7ff,tilt=0){const pts=[];for(let i=0;i<=128;i++){const a=i/128*Math.PI*2;pts.push(new THREE.Vector3(Math.cos(a)*r,Math.sin(a)*r,0));}const o=line(parent,pts,color,.65);o.rotation.x=tilt;return o;}
+      const configs={
+       atom:{title:'ATOM MODEL · 3D',tag:'PHYSICS',heading:'পরমাণুর গঠন: একটি সরলীকৃত মডেল',desc:'কেন্দ্রের নিউক্লিয়াসে প্রোটন ও নিউট্রন থাকে। চারপাশের কক্ষপথ কেবল শিক্ষামূলক ইঙ্গিত—আধুনিক কোয়ান্টাম তত্ত্বে ইলেকট্রনকে নির্দিষ্ট গ্রহীয় কক্ষপথে ধরা হয় না।',steps:['কেন্দ্রের নিউক্লিয়াসে থাকা ভিন্ন রঙের কণা দেখো।','তিনটি কক্ষপথ ঘুরিয়ে 3D বিন্যাস বোঝো।','ব্যাখ্যা করো কেন এই চিত্র বাস্তব অরবিটালের পূর্ণ মডেল নয়।'],formula:'Key idea: atomic nucleus + quantum orbitals',build(){sphere(root,.48,0xff718d);sphere(root,.35,0x6ef7ff,.25,.12,.15);sphere(root,.27,0xbd8cff,-.2,-.18,.18);[1.25,1.7,2.15].forEach((r,i)=>{const g=new THREE.Group();root.add(g);ring(g,r,[0x6ef7ff,0xa78bfa,0x6d8dff][i],i*Math.PI/3);sphere(g,.10,[0x6ef7ff,0xa78bfa,0xffd580][i],r,0,0);g.userData.orbit=true;g.userData.phase=i*1.8;});}},
+       molecule:{title:'MOLECULE MODEL · 3D',tag:'CHEMISTRY',heading:'মলিকিউলার জ্যামিতি',desc:'এই আদর্শ H₂O-সদৃশ মডেলে অক্সিজেনকে বড় কেন্দ্রীয় গোলক এবং হাইড্রোজেনকে ছোট গোলক দিয়ে দেখানো হয়েছে। বাস্তব জ্যামিতি, পরমাণুর আকার ও বন্ধন-কোণ মডেলভেদে বদলায়।',steps:['কেন্দ্রীয় পরমাণু ও দুটি পার্শ্ববর্তী পরমাণু চিহ্নিত করো।','মডেল ঘুরিয়ে অণুর 3D আকৃতি দেখো।','VSEPR ধারণা দিয়ে বাঁকানো আকৃতি ব্যাখ্যা করো।'],formula:'Example: H₂O is bent; H–O–H ≈ 104.5°',build(){sphere(root,.48,0xff6b73);const a=sphere(root,.28,0x6ef7ff,-.85,.55,0),b=sphere(root,.28,0x6ef7ff,.85,.55,0);line(root,[a.position.clone(),new THREE.Vector3(0,0,0),b.position.clone()],0xc8d6ff);}},
+       solar:{title:'SOLAR SYSTEM · NOT TO SCALE',tag:'ASTRONOMY',heading:'সৌরজগতের কক্ষপথ',desc:'সূর্যকে কেন্দ্র করে গ্রহগুলোর কক্ষপথের ধারণামূলক দৃশ্য। দূরত্ব ও গ্রহের আকার বাস্তব স্কেলে দেখানো হয়নি; বাস্তব সৌরজগতের অনুপাত অনেক বেশি বিস্তৃত।',steps:['সূর্য ও আলাদা রঙের গ্রহ শনাক্ত করো।','গ্রহের কক্ষপথের ভিন্ন ব্যাসার্ধ তুলনা করো।','কেন স্কেল-সঠিক সৌরজগত এক ফ্রেমে দেখানো কঠিন, তা ভাবো।'],formula:'Orbit speed and period depend on orbital radius',build(){sphere(root,.58,0xffc65c);const colors=[0xb7a28d,0x62c9ff,0x57a779,0xe58c66,0xd8bc95,0xd9d1b7];[1.05,1.45,1.9,2.4,2.95,3.5].forEach((r,i)=>{ring(root,r,i%2?0x6d8dff:0x6ef7ff,0);const g=new THREE.Group();root.add(g);sphere(g,[.09,.14,.16,.12,.25,.2][i],colors[i],r,0,0);g.userData.orbit=true;g.userData.phase=i*.9;g.userData.orbitSpeed=.25/(i+1);});}},
+       dna:{title:'DNA DOUBLE HELIX · SCHEMATIC',tag:'BIOLOGY',heading:'DNA-র দ্বি-হেলিক্স',desc:'দুটি সুগার-ফসফেট ব্যাকবোনের মাঝে বেস-পেয়ার সিঁড়ির ধাপের মতো থাকে। এখানে রঙিন সর্পিল ও সংযোগরেখা দিয়ে DNA-র আকৃতি ধারণাগতভাবে দেখানো হয়েছে; এটি নির্দিষ্ট পরমাণু-স্তরের মডেল নয়।',steps:['দুটি বিপরীতমুখী সর্পিল রেখা অনুসরণ করো।','মাঝের সংযোগগুলোকে বেস-পেয়ারের প্রতীক হিসেবে দেখো।','পরিপূরক বেস-পেয়ারিং কীভাবে কপি করতে সাহায্য করে তা ব্যাখ্যা করো।'],formula:'DNA base pairing: A–T and G–C',build(){const n=120,h=2.9,r=.8,pts1=[],pts2=[];for(let i=0;i<=n;i++){const t=i/n*Math.PI*8,y=(i/n-.5)*h;pts1.push(new THREE.Vector3(Math.cos(t)*r,y,Math.sin(t)*r));pts2.push(new THREE.Vector3(Math.cos(t+Math.PI)*r,y,Math.sin(t+Math.PI)*r));}line(root,pts1,0x6ef7ff,.95);line(root,pts2,0xbd8cff,.95);for(let i=0;i<=n;i+=6){line(root,[pts1[i],pts2[i]],0xffd580,.7);sphere(root,.045,0x6ef7ff,pts1[i].x,pts1[i].y,pts1[i].z);sphere(root,.045,0xbd8cff,pts2[i].x,pts2[i].y,pts2[i].z);}}},
+       pendulum:{title:'SIMPLE PENDULUM · MODEL',tag:'MECHANICS',heading:'সরল দোলক ও দোলন',desc:'একটি ভর সুতোয় ঝুলে সামনের-পেছনের দিকে দোলার আদর্শ মডেল। ছোট কোণের ক্ষেত্রে সময়কাল আনুমানিক T = 2π√(L/g), এবং ভরের ওপর তা নির্ভর করে না।',steps:['সুতো, পিভট এবং ভর চিহ্নিত করো।','অ্যানিমেশন দেখো: শক্তি গতিশক্তি ও বিভবশক্তির মধ্যে বদলায়।','ছোট কোণের অনুমান কখন ভেঙে যেতে পারে, তা আলোচনা করো।'],formula:'Small-angle period: T ≈ 2π√(L/g)',build(){sphere(root,.10,0xffd580,0,1.8,0);line(root,[new THREE.Vector3(0,1.8,0),new THREE.Vector3(0,-.7,0)],0xc8d6ff);sphere(root,.34,0x6ef7ff,0,-.7,0);root.userData.pendulum=true;}},
+       crystal:{title:'CRYSTAL LATTICE · SCHEMATIC',tag:'MATERIALS SCIENCE',heading:'স্ফটিক জালক',desc:'নিয়মিত বিন্যাসে থাকা কণাগুলো একটি crystal lattice-এর ধারণা বোঝায়। বাস্তবে স্ফটিকের unit cell, পরমাণুর ধরন এবং বন্ধনের জ্যামিতি উপাদানভেদে আলাদা।',steps:['নিয়মিত সারি ও স্তরের বিন্যাস দেখো।','কল্পনা করো কীভাবে unit cell পুনরাবৃত্তি হয়ে স্ফটিক তৈরি করে।','বাস্তব স্ফটিকের ত্রুটি ও তাপীয় কম্পনের কথা বিবেচনা করো।'],formula:'Concept: repeating unit cell in 3D',build(){const colors=[0x6ef7ff,0xbd8cff,0x6d8dff];for(let x=-2;x<=2;x++)for(let y=-2;y<=2;y++)for(let z=-1;z<=1;z++){sphere(root,.105,colors[(x+y+z+9)%3],x*.62,y*.62,z*.62);}for(let x=-2;x<2;x++)for(let y=-2;y<=2;y++)for(let z=-1;z<=1;z++)line(root,[new THREE.Vector3(x*.62,y*.62,z*.62),new THREE.Vector3((x+1)*.62,y*.62,z*.62)],0x6ef7ff,.15);}}
+      };
+      let current='atom';
+      function renderModel(key){current=key;const c=configs[key];clearRoot();c.build();$('#modelTitle').textContent=c.title;$('#modelTag').textContent=c.tag;$('#modelHeading').textContent=c.heading;$('#modelDescription').textContent=c.desc;$('#modelFormula').textContent=c.formula;$('#modelSteps').innerHTML=c.steps.map(s=>'<li></li>').join('');[...$('#modelSteps').children].forEach((li,i)=>li.textContent=c.steps[i]);root.scale.setScalar(key==='solar'?.72:key==='crystal'?.9:1);root.position.y=key==='pendulum'?.1:0;rotX=0;rotY=0;root.rotation.set(0,0,0);}
+      function resize(){const rect=canvas.parentElement.getBoundingClientRect();const w=Math.max(1,rect.width),h=Math.max(1,rect.height);renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();}
+      const ro=new ResizeObserver(resize);ro.observe(canvas.parentElement);resize();renderModel('atom');
+      $('#modelSelect').addEventListener('change',e=>renderModel(e.target.value));
+      $('#modelSpeed').addEventListener('input',e=>{speed=Number(e.target.value);$('#speedOut').textContent=speed.toFixed(1)+'×';});
+      $('#modelPause').addEventListener('click',()=>{paused=!paused;$('#modelPause').firstChild.textContent=paused?'▶ ':'Ⅱ ';});
+      $('#modelReset').addEventListener('click',()=>{speed=1;$('#modelSpeed').value=1;$('#speedOut').textContent='1.0×';paused=false;$('#modelPause').firstChild.textContent='Ⅱ ';rotX=rotY=0;renderModel($('#modelSelect').value);});
+      canvas.addEventListener('pointerdown',e=>{dragging=true;lastX=e.clientX;lastY=e.clientY;canvas.setPointerCapture(e.pointerId);});
+      canvas.addEventListener('pointermove',e=>{if(!dragging)return;rotY+=(e.clientX-lastX)*.008;rotX+=(e.clientY-lastY)*.008;lastX=e.clientX;lastY=e.clientY;root.rotation.set(rotX,rotY,0);});
+      canvas.addEventListener('pointerup',()=>dragging=false);canvas.addEventListener('pointercancel',()=>dragging=false);
+      canvas.addEventListener('wheel',e=>{e.preventDefault();camera.position.z=Math.max(4,Math.min(13,camera.position.z+e.deltaY*.008));},{passive:false});
+      function animate(){raf=requestAnimationFrame(animate);if(!paused){root.rotation.y+=.003*speed;if(configs[current]&&current==='pendulum'&&root.userData.pendulum)root.rotation.z=Math.sin(Date.now()*.0015*speed)*.38;root.children.forEach(obj=>{if(obj.userData.orbit){obj.rotation.z+=.004*speed;obj.rotation.x+=.001*speed;}});}renderer.render(scene,camera);}
+      animate();
+    }catch(err){canvas.parentElement.querySelector('.stage-help').textContent='3D rendering is unavailable in this browser. Try a recent browser with WebGL enabled.';}
+  })();
 
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        container.appendChild(renderer.domElement);
+  // Interactive wave chart
+  let waveChart = null, areaChart = null, pendulumChart = null;
+  const chartDefaults = {
+    responsive:true, maintainAspectRatio:false, animation:{duration:180},
+    plugins:{legend:{display:false},tooltip:{enabled:true}},
+    scales:{
+      x:{grid:{color:'rgba(145,170,220,.10)'},ticks:{color:'#9eaccd',maxTicksLimit:7},title:{display:true,text:'Position (x)',color:'#aab6d3'}},
+      y:{grid:{color:'rgba(145,170,220,.10)'},ticks:{color:'#9eaccd'},title:{display:true,text:'Displacement (y)',color:'#aab6d3'}}
+    }
+  };
+  function buildWave(){
+    const A = Number($('#amp').value), f = Number($('#freq').value), phaseDeg = Number($('#phase').value);
+    const phase = phaseDeg * Math.PI / 180;
+    $('#ampVal').textContent = A.toFixed(1);
+    $('#freqVal').textContent = f.toFixed(1);
+    $('#phaseVal').textContent = `${phaseDeg}°`;
+    $('#waveSummary').textContent = `A = ${A.toFixed(1)} · f = ${f.toFixed(1)} · φ = ${phaseDeg}°`;
+    const data = Array.from({length:201},(_,i)=>{const x=i/200*4;return {x:Number(x.toFixed(2)),y:A*Math.sin(2*Math.PI*f*x+phase)}});
+    if(!window.Chart) { $('#waveSummary').textContent += ' · Chart library unavailable'; return; }
+    if(!waveChart){
+      waveChart = new Chart($('#waveChart'),{type:'line',data:{datasets:[{data,borderColor:'#6ef7ff',borderWidth:2.5,pointRadius:0,tension:.12,fill:{target:'origin',above:'rgba(110,247,255,.10)'}}]},options:{...chartDefaults,parsing:false,scales:{x:{...chartDefaults.scales.x,type:'linear',min:0,max:4,title:{display:true,text:'Position (x)',color:'#aab6d3'}},y:{...chartDefaults.scales.y,min:-2.2,max:2.2,title:{display:true,text:'Displacement (y)',color:'#aab6d3'}}}}});
+    } else {waveChart.data.datasets[0].data=data;waveChart.update();}
+  }
+  ['amp','freq','phase'].forEach(id => $('#'+id).addEventListener('input',buildWave));
+  $('#resetLab').addEventListener('click',()=>{$('#amp').value=1;$('#freq').value=1;$('#phase').value=0;buildWave();});
+  buildWave();
 
-        const geometry = new THREE.BufferGeometry();
-        const count = 1000;
-        const positions = new Float32Array(count * 3);
+  // Charts use formula-derived model values, not purported experimental measurements.
+  if(window.Chart){
+    const labels=[1,2,3,4,5,6];
+    areaChart=new Chart($('#areaChart'),{type:'line',data:{labels,datasets:[{data:labels.map(s=>s*s),borderColor:'#bd8cff',backgroundColor:'rgba(189,140,255,.15)',fill:true,tension:.25,pointRadius:3,pointBackgroundColor:'#bd8cff'}]},options:{...chartDefaults,scales:{x:{...chartDefaults.scales.x,title:{display:true,text:'Side length s',color:'#aab6d3'}},y:{...chartDefaults.scales.y,beginAtZero:true,title:{display:true,text:'Area A = s²',color:'#aab6d3'}}}}});
+    const lengths=[.2,.4,.6,.8,1,1.2,1.4,1.6,1.8,2];
+    const periods=lengths.map(L=>Number((2*Math.PI*Math.sqrt(L/9.81)).toFixed(3)));
+    pendulumChart=new Chart($('#pendulumChart'),{type:'line',data:{labels:lengths,datasets:[{data:periods,borderColor:'#6ef7ff',backgroundColor:'rgba(110,247,255,.12)',fill:true,tension:.25,pointRadius:3,pointBackgroundColor:'#6ef7ff'}]},options:{...chartDefaults,scales:{x:{...chartDefaults.scales.x,title:{display:true,text:'Length L (m)',color:'#aab6d3'}},y:{...chartDefaults.scales.y,beginAtZero:true,title:{display:true,text:'Period T (s)',color:'#aab6d3'}}}}});
+  } else {
+    $$('.chart-wrap canvas').forEach(c=>{const ctx=c.getContext('2d');ctx.fillStyle='#aab6d3';ctx.font='14px sans-serif';ctx.fillText('Chart library unavailable. Please check your internet connection.',12,30);});
+  }
 
-        for (let i = 0; i < count * 3; i++) {
-            positions[i] = (Math.random() - 0.5) * 20;
-        }
+  // Accessible expandable science fact cards
+  $$('.fact-card').forEach(card => card.addEventListener('click',()=>{
+    const expanded = card.getAttribute('aria-expanded') === 'true';
+    card.setAttribute('aria-expanded', String(!expanded));
+  }));
 
-        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-
-        const material = new THREE.PointsMaterial({
-            size: 0.04,
-            color: 0x00f2fe,
-            transparent: true,
-            opacity: 0.8
-        });
-
-        const particles = new THREE.Points(geometry, material);
-        scene.add(particles);
-        camera.position.z = 5;
-
-        let mouseX = 0;
-        let mouseY = 0;
-        document.addEventListener('mousemove', (e) => {
-            mouseX = (e.clientX / window.innerWidth) - 0.5;
-            mouseY = (e.clientY / window.innerHeight) - 0.5;
-        });
-
-        function animate() {
-            requestAnimationFrame(animate);
-            particles.rotation.y += 0.0015;
-            particles.rotation.x += 0.0008;
-
-            camera.position.x += (mouseX * 0.8 - camera.position.x) * 0.05;
-            camera.position.y += (-mouseY * 0.8 - camera.position.y) * 0.05;
-
-            renderer.render(scene, camera);
-        }
-        animate();
-
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        });
-
-        // Fact Modal Script
-        function openFactModal(title, desc) {
-            document.getElementById('modalTitle').innerText = title;
-            document.getElementById('modalDesc').innerText = desc;
-            document.getElementById('factModal').style.display = 'flex';
-        }
-
-        function closeFactModal() {
-            document.getElementById('factModal').style.display = 'none';
-        }
-
-        // Language Toggle System
-        let isEnglish = false;
-        function toggleLanguage() {
-            isEnglish = !isEnglish;
-            const desc = document.getElementById('hero-desc');
-            if (isEnglish) {
-                desc.innerText = "An advanced virtual universe of science and research founded by Souparno Roy. Explore Physics, Chemistry, Mathematics, and Biology through 200+ 3D practical simulation video modules and 30+ institutional research papers from CERN, MIT, Stanford, and Princeton.";
-            } else {
-                desc.innerText = "পদার্থবিদ্যা, রসায়ন, গণিত এবং জীববিদ্যার এক উন্নত ভার্চুয়াল ইউনিভার্স। এখানে ফিজিক্স, কেমিস্ট্রি, বায়োলজি এবং ম্যাথের জন্য রয়েছে ২০০+ এর বেশি থ্রি-ডি অ্যানিমেশন ও সিমুলেশন ল্যাব এবং বিশ্বখ্যাত ল্যাবরেটরিগুলোর (CERN, MIT, Stanford ইত্যাদি) ৩০+ গভীর রিসার্চ পেপার।";
-            }
-        }
-    </script>
+  // Three.js background: guarded for browsers without WebGL; low-motion preferences are respected.
+  const space = $('#space');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(window.THREE && !reduceMotion){
+    try{
+      const scene=new THREE.Scene();
+      const camera=new THREE.PerspectiveCamera(70,window.innerWidth/window.innerHeight,.1,100);
+      camera.position.z=5;
+      const renderer=new THREE.WebGLRenderer({alpha:true,antialias:false,powerPreference:'low-power'});
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,1.5));
+      renderer.setSize(window.innerWidth,window.innerHeight);
+      space.appendChild(renderer.domElement);
+      const count=550, positions=new Float32Array(count*3);
+      for(let i=0;i<count;i++){positions[i*3]=(Math.random()-.5)*22;positions[i*3+1]=(Math.random()-.5)*14;positions[i*3+2]=(Math.random()-.5)*18;}
+      const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.BufferAttribute(positions,3));
+      const material=new THREE.PointsMaterial({color:0x6ef7ff,size:.035,transparent:true,opacity:.72,sizeAttenuation:true});
+      const stars=new THREE.Points(geometry,material);scene.add(stars);
+      let targetX=0,targetY=0,raf=0;
+      window.addEventListener('pointermove',e=>{targetX=(e.clientX/window.innerWidth-.5)*.35;targetY=(e.clientY/window.innerHeight-.5)*-.25;},{passive:true});
+      const resize=()=>{camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix();renderer.setSize(window.innerWidth,window.innerHeight);};
+      window.addEventListener('resize',resize,{passive:true});
+      let active=true;
+      document.addEventListener('visibilitychange',()=>{active=!document.hidden;if(active) animate();else cancelAnimationFrame(raf);});
+      function animate(){if(!active)return;raf=requestAnimationFrame(animate);stars.rotation.y+=.00045;stars.rotation.x+=.00018;camera.position.x+=(targetX-camera.position.x)*.015;camera.position.y+=(targetY-camera.position.y)*.015;renderer.render(scene,camera);}
+      animate();
+    }catch(err){space.style.display='none';}
+  }
+})();
+</script>
 </body>
 </html>

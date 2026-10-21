@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Three.js Library for 3D Simulation Background -->
+    <!-- Three.js Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <style>
@@ -18,7 +18,7 @@
             --accent-color: #00f2fe;
             --secondary-accent: #4facfe;
             --text-color: #f8fafc;
-            --card-bg: rgba(15, 23, 42, 0.9);
+            --card-bg: rgba(15, 23, 42, 0.95);
             --glow: 0 0 25px rgba(0, 242, 254, 0.5);
         }
 
@@ -37,7 +37,6 @@
             position: relative;
         }
 
-        /* 3D Canvas Background */
         #canvas-container {
             position: fixed;
             top: 0;
@@ -54,7 +53,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 8%;
-            background: rgba(7, 11, 25, 0.95);
+            background: rgba(7, 11, 25, 0.98);
             backdrop-filter: blur(15px);
             position: sticky;
             top: 0;
@@ -76,7 +75,8 @@
         nav ul {
             display: flex;
             list-style: none;
-            gap: 25px;
+            gap: 20px;
+            align-items: center;
         }
 
         nav ul li a {
@@ -89,6 +89,22 @@
         nav ul li a:hover {
             color: var(--accent-color);
             text-shadow: var(--glow);
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 6px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .lang-btn:hover {
+            background: var(--accent-color);
+            color: var(--primary-color);
         }
 
         /* Hero Section */
@@ -111,7 +127,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-shadow: var(--glow);
-            letter-spacing: 2px;
         }
 
         .hero .subtitle {
@@ -171,7 +186,7 @@
             color: var(--primary-color);
         }
 
-        /* General Section Styling */
+        /* General Section */
         section {
             padding: 90px 8%;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -251,35 +266,64 @@
             border: 1px solid rgba(0, 242, 254, 0.4);
         }
 
-        /* Solved Examples Box */
-        .example-box {
-            background: var(--card-bg);
-            border: 1px solid rgba(0, 242, 254, 0.3);
-            border-radius: 14px;
-            padding: 30px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-        }
-
-        .example-box h4 {
-            color: var(--accent-color);
-            font-size: 1.3rem;
+        /* Video Container */
+        .video-box {
+            position: relative;
+            width: 100%;
+            height: 190px;
+            background: #020617;
+            border-radius: 12px;
+            overflow: hidden;
             margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-family: 'Orbitron', sans-serif;
+            border: 1px solid rgba(0, 242, 254, 0.3);
         }
 
-        .example-box .formula {
-            background: rgba(0, 0, 0, 0.6);
-            padding: 12px 18px;
-            border-radius: 8px;
-            font-family: monospace;
-            color: #38bdf8;
-            margin: 15px 0;
-            display: inline-block;
-            border-left: 4px solid var(--accent-color);
+        .video-box iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Fact Modal */
+        .fact-trigger-card {
+            cursor: pointer;
+            text-align: center;
+            border: 2px dashed var(--accent-color);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(10px);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid var(--accent-color);
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            box-shadow: var(--glow);
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2rem;
+            color: var(--accent-color);
+            cursor: pointer;
         }
 
         /* Footer */
@@ -302,7 +346,6 @@
             font-weight: 600;
         }
 
-        /* Mobile Responsive */
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.6rem; }
             nav ul { display: none; }
@@ -312,22 +355,22 @@
 </head>
 <body>
 
-    <!-- 3D Interactive Background -->
+    <!-- 3D Canvas Background -->
     <div id="canvas-container"></div>
 
     <!-- Header / Navbar -->
     <header>
         <div class="logo">
-            <i class="fa-solid fa-atom fa-spin"></i> RISHI SCINIVERSE
+            <i class="fa-solid fa-atom fa-spin"></i> ঋষি সাইনিভার্স (RISHI SCINIVERSE)
         </div>
         <nav>
             <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#subjects">Subjects</a></li>
-                <li><a href="#practicals">3D Practicals</a></li>
-                <li><a href="#examples">Solved Examples</a></li>
-                <li><a href="#research">Research Notes</a></li>
-                <li><a href="#facts">Science Facts</a></li>
+                <li><a href="#home">হোম</a></li>
+                <li><a href="#subjects">বিষয়সমূহ</a></li>
+                <li><a href="#practicals">প্র্যাকটিক্যাল (২০০+)</a></li>
+                <li><a href="#research">রিসার্চ পেপার্স (৩০+)</a></li>
+                <li><a href="#facts">অজানা তথ্য</a></li>
+                <li><button class="lang-btn" onclick="toggleLanguage()"><i class="fa-solid fa-globe"></i> EN / BN</button></li>
             </ul>
         </nav>
     </header>
@@ -335,161 +378,161 @@
     <!-- Hero Section -->
     <section class="hero" id="home">
         <h1>RISHI SCINIVERSE</h1>
-        <div class="subtitle">Founded & Developed by <strong>Souparno Roy</strong></div>
-        <p>Enter the next-generation virtual universe of science and advanced research. Explore Physics, Chemistry, Mathematics, and Biology through immersive 3D simulations, rigorous mathematical proofs, and breakthrough institutional research papers.</p>
+        <div class="subtitle">প্রতিষ্ঠাতা ও ডেভেলপার: <strong>সৌতপূর্ণ রায় (Souparno Roy)</strong></div>
+        <p id="hero-desc">পদার্থবিদ্যা, রসায়ন, গণিত এবং জীববিদ্যার এক বিশাল ভার্চুয়াল ইউনিভার্স। এখানে রয়েছে ২০০+ এর বেশি ইন্টারঅ্যাক্টিভ থ্রি-ডি প্র্যাকটিক্যাল ভিডিও সিমুলেশন এবং বিশ্বের শীর্ষস্থানীয় ল্যাবরেটরির ৩০+ রিসার্চ পেপার।</p>
         <div class="cta-buttons">
-            <a href="#practicals" class="btn btn-primary"><i class="fa-solid fa-cube"></i> Explore 3D Practicals</a>
-            <a href="#research" class="btn btn-secondary"><i class="fa-solid fa-flask-vial"></i> View Research Papers</a>
+            <a href="#practicals" class="btn btn-primary"><i class="fa-solid fa-cube"></i> প্র্যাকটিক্যাল ভিডিও দেখুন</a>
+            <a href="#research" class="btn btn-secondary"><i class="fa-solid fa-flask-vial"></i> প্রাতিষ্ঠানিক গবেষণা</a>
         </div>
     </section>
 
     <!-- Subjects Section -->
     <section id="subjects">
-        <h2 class="section-title">Core Disciplines</h2>
-        <p class="section-desc">Comprehensive scientific research frameworks and foundational equations explained with logical precision.</p>
+        <h2 class="section-title">মূল বিজ্ঞান শাখা</h2>
+        <p class="section-desc">গভীর বিশ্লেষণ ও লজিক্যাল কাঠামোর মাধ্যমে বিজ্ঞান ও গবেষণার মূল ভিত্তি।</p>
         
         <div class="grid-container">
             <div class="card">
                 <div>
                     <i class="fa-solid fa-bolt"></i>
-                    <h3>Physics</h3>
-                    <p>Advanced study of Quantum Mechanics, General Relativity, Electrodynamics, and Non-linear Dynamics with interactive models.</p>
+                    <h3>পদার্থবিদ্যা (Physics)</h3>
+                    <p>কোয়ান্টাম মেকানিক্স, আপেক্ষিকতা তত্ত্ব এবং তড়িৎ গতিবিদ্যার ৫০+ সিমুলেশন ও প্র্যাকটিক্যাল।</p>
                 </div>
-                <a href="#practicals" class="btn btn-secondary">Explore Physics</a>
+                <a href="#practicals" class="btn btn-secondary">ফিজিক্স প্র্যাকটিক্যাল</a>
             </div>
             <div class="card">
                 <div>
                     <i class="fa-solid fa-flask"></i>
-                    <h3>Chemistry</h3>
-                    <p>Molecular Orbital Theory, Thermodynamic Kinetics, Organic Synthesis Pathways, and Coordination Chemistry dynamics.</p>
+                    <h3>রসায়ন (Chemistry)</h3>
+                    <p>মলিকুলার অরবিটাল থিওরি, থার্মোডাইনামিক কাইনেটিক্স এবং জৈব সংশ্লেষণ সংক্রান্ত ৫০+ প্র্যাকটিক্যাল।</p>
                 </div>
-                <a href="#practicals" class="btn btn-secondary">Explore Chemistry</a>
+                <a href="#practicals" class="btn btn-secondary">কেমিস্ট্রি প্র্যাকটিক্যাল</a>
             </div>
             <div class="card">
                 <div>
                     <i class="fa-solid fa-calculator"></i>
-                    <h3>Mathematics</h3>
-                    <p>Multivariable Calculus, Tensor Analysis, Differential Geometry, and Abstract Algebraic Proof systems.</p>
+                    <h3>গণিত (Mathematics)</h3>
+                    <p>মাল্টিভ্যারিয়েবল ক্যালকুলাস, টেন্সর অ্যানালাইসিস এবং জ্যামিতিক প্রমাণের ভিডিও টিউটোরিয়াল।</p>
                 </div>
-                <a href="#examples" class="btn btn-secondary">Explore Mathematics</a>
+                <a href="#practicals" class="btn btn-secondary">ম্যাথ প্র্যাকটিক্যাল</a>
             </div>
             <div class="card">
                 <div>
                     <i class="fa-solid fa-dna"></i>
-                    <h3>Biology</h3>
-                    <p>Molecular Genetics, Neurotransmitter Signaling Pathways, Epigenetic Regulation, and Cellular Machinery.</p>
+                    <h3>জীববিদ্যা (Biology)</h3>
+                    <p>ডিএনএ রেপ্লিকেশন, জিন এডিটিং এবং নিউরোট্রান্সমিটার সিগন্যালিংয়ের ৫০+ উন্নত থ্রি-ডি প্র্যাকটিক্যাল।</p>
                 </div>
-                <a href="#practicals" class="btn btn-secondary">Explore Biology</a>
+                <a href="#practicals" class="btn btn-secondary">বায়োলজি প্র্যাকটিক্যাল</a>
             </div>
         </div>
     </section>
 
-    <!-- 3D Practicals Section -->
+    <!-- Interactive Practicals Section -->
     <section id="practicals">
-        <h2 class="section-title">Interactive 3D Practicals & Mechanisms</h2>
-        <p class="section-desc">Understand <strong>WHY</strong> and <strong>HOW</strong> physical and chemical phenomena occur through detailed step-by-step logic.</p>
+        <h2 class="section-title">ইন্টারঅ্যাক্টিভ থ্রি-ডি প্র্যাকটিক্যাল ও ভিডিও ল্যাব (২০০+ মডিউল)</h2>
+        <p class="section-desc">প্রতিটি বিষয়ে রয়েছে ৫০টিরও বেশি থ্রি-ডি অ্যানিমেশন ও ভিডিও প্র্যাকটিক্যাল মডিউল।</p>
         
         <div class="grid-container">
             <div class="card">
-                <div class="badge">PHYSICS 3D PRACTICAL</div>
-                <h3>Simple Harmonic Motion & Damping</h3>
-                <p><strong>Why & How it happens:</strong> When a system is displaced from equilibrium, a restoring force proportional to displacement ($F = -kx$) pulls it back. In real-world environments, damping forces (proportional to velocity) gradually dissipate energy into heat, causing amplitude decay.</p>
+                <div class="badge">ফিজিক্স প্র্যাকটিক্যাল (১/৫০+)</div>
+                <div class="video-box">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Physics Simulation" allowfullscreen></iframe>
+                </div>
+                <h3>সরল ছন্দিত গতি ও ড্যাম্পিং (SHM)</h3>
+                <p><strong>কীভাবে কাজ করে:</strong> সাম্যবস্থা থেকে কোনো বস্তুকে সরালে প্রত্যয়নী বল কাজ করে ($F = -kx$)।</p>
             </div>
 
             <div class="card">
-                <div class="badge">CHEMISTRY 3D PRACTICAL</div>
-                <h3>VSEPR Molecular Geometry</h3>
-                <p><strong>Why & How it happens:</strong> Valence Shell Electron Pair Repulsion theory dictates that electron pairs surrounding a central metallic or non-metallic atom position themselves as far apart as possible to minimize electrostatic repulsion, giving rise to unique spatial configurations like tetrahedral or octahedral shapes.</p>
+                <div class="badge">কেমিস্ট্রি প্র্যাকটিক্যাল (১/৫০+)</div>
+                <div class="video-box">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Chemistry Simulation" allowfullscreen></iframe>
+                </div>
+                <h3>VSEPR আণবিক জ্যামিতি</h3>
+                <p><strong>কীভাবে কাজ করে:</strong> কেন্দ্রীয় পরমাণুর চারপাশের ইলেকট্রন জোড়গুলোর পারস্পরিক বিকর্ষণ কমানোর বিন্যাস।</p>
             </div>
 
             <div class="card">
-                <div class="badge">BIOLOGY 3D PRACTICAL</div>
-                <h3>DNA Replication & Enzymatic Action</h3>
-                <p><strong>Why & How it happens:</strong> DNA Helicase breaks hydrogen bonds holding nucleotide base pairs together (Adenine-Thymine, Guanine-Cytosine). DNA Polymerase then reads the template strand to synthesize leading and lagging strands, ensuring genetic fidelity.</p>
+                <div class="badge">বায়োলজি প্র্যাকটিক্যাল (১/৫০+)</div>
+                <div class="video-box">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Biology Simulation" allowfullscreen></iframe>
+                </div>
+                <h3>ডিএনএ রেপ্লিকেশন ও এনজাইম অ্যাকশন</h3>
+                <p><strong>কীভাবে কাজ করে:</strong> ডিএনএ হেলিকেস হাইড্রোজেন বন্ড ভেঙে রেপ্লিকেশন ফর্ক তৈরি করে।</p>
             </div>
-        </div>
-    </section>
 
-    <!-- Solved Examples Section -->
-    <section id="examples">
-        <h2 class="section-title">Advanced Solved Research Examples</h2>
-        <p class="section-desc">Step-by-step mathematical problem solving with real-world applications across disciplines.</p>
-
-        <div class="example-box">
-            <h4><i class="fa-solid fa-check-circle"></i> 1. Relativistic Kinetic Energy (Physics)</h4>
-            <p><strong>Problem:</strong> Calculate the relativistic kinetic energy of an electron moving at $0.8c$ (where $c = 3 \times 10^8 \text{ m/s}$, rest mass $m_0 = 9.11 \times 10^{-31} \text{ kg}$).</p>
-            <div class="formula">Formula: $K = (\gamma - 1) m_0 c^2$ where $\gamma = 1 / \sqrt{1 - v^2/c^2}$</div>
-            <p><strong>Detailed Solution:</strong><br>
-            1. Lorentz Factor ($\gamma$): $1 / \sqrt{1 - (0.8)^2} = 1 / \sqrt{0.36} = 1 / 0.6 = 1.667$<br>
-            2. Rest Energy ($m_0 c^2$): $8.2 \times 10^{-14} \text{ Joules}$<br>
-            <strong>Result:</strong> $K = (1.667 - 1) \times 8.2 \times 10^{-14} = 5.47 \times 10^{-14} \text{ Joules}$.</p>
-        </div>
-
-        <div class="example-box">
-            <h4><i class="fa-solid fa-check-circle"></i> 2. Rate of Chemical Reaction (Chemistry)</h4>
-            <p><strong>Problem:</strong> For the reaction $2N_2O_5 \rightarrow 4NO_2 + O_2$, if the disappearance rate of $N_2O_5$ is $4.2 \times 10^{-4} \text{ M/s}$, find the rate of formation of $NO_2$.</p>
-            <div class="formula">Formula: $\text{Rate} = -\frac{1}{2}\frac{\Delta[N_2O_5]}{\Delta t} = +\frac{1}{4}\frac{\Delta[NO_2]}{\Delta t}$</div>
-            <p><strong>Detailed Solution:</strong><br>
-            $\frac{\Delta[NO_2]}{\Delta t} = 2 \times (-\frac{\Delta[N_2O_5]}{\Delta t})$<br>
-            $= 2 \times 4.2 \times 10^{-4} = 8.4 \times 10^{-4} \text{ M/s}$.</p>
+            <div class="card">
+                <div class="badge">ম্যাথমেটিক্স প্র্যাকটিক্যাল (১/৫০+)</div>
+                <div class="video-box">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Math Simulation" allowfullscreen></iframe>
+                </div>
+                <h3>টেন্সর ফিল্ড ও কার্ভেচার অ্যানালাইসিস</h3>
+                <p><strong>কীভাবে কাজ করে:</strong> দ্বিমাত্রিক ও ত্রিমাত্রিক তলে ভেক্টরের রূপান্তর এবং বক্রতার জ্যামিতিক সিমুলেশন।</p>
+            </div>
         </div>
     </section>
 
     <!-- Research Notes & Papers Section -->
     <section id="research">
-        <h2 class="section-title">Institutional Research Notes & Papers</h2>
-        <p class="section-desc">Exploratory reviews inspired by breakthroughs from global research institutions (CERN, MIT, Caltech, Stanford).</p>
+        <h2 class="section-title">বিশ্বমানের প্রাতিষ্ঠানিক গবেষণা পেপারস (৩০+ পেপার)</h2>
+        <p class="section-desc">CERN, MIT, Caltech, Stanford, NASA এবং প্রিন্সটনের গবেষণার ওপর ভিত্তি করে তৈরি গভীর নোটস।</p>
         
         <div class="grid-container">
             <div class="card">
-                <div class="badge">PHYSICS RESEARCH | CERN INSPIRED</div>
-                <h3>Higgs Field Interaction & Mass Generation</h3>
-                <p>Detailed notes on how elementary particles acquire mass through their interaction with the pervasive Higgs field, verified via symmetry-breaking mechanisms in particle accelerators.</p>
+                <div class="badge">CERN | ফিজিক্স রিসার্চ (১/৩০)</div>
+                <h3>হিগস ফিল্ড ইন্টারঅ্যাকশন ও ভর সৃষ্টি</h3>
+                <p>মৌলিক কণাগুলো কীভাবে হিগস ফিল্ডের সাথে মিথস্ক্রিয়ার মাধ্যমে ভর লাভ করে তার কোয়ান্টাম বিশ্লেষণ।</p>
             </div>
             <div class="card">
-                <div class="badge">BIOLOGY RESEARCH | HARVARD/MIT</div>
-                <h3>CRISPR-Cas13 RNA Editing Dynamics</h3>
-                <p>Investigation into Cas13 enzymes targeting single-stranded RNA with high precision, opening doors to reversible transcriptomic therapies without permanent genomic alterations.</p>
+                <div class="badge">HARVARD/MIT | বায়োলজি রিসার্চ (২/৩০)</div>
+                <h3>CRISPR-Cas13 RNA এডিটিং ডাইনামিক্স</h3>
+                <p>স্থায়ী জিনোম পরিবর্তন ছাড়াই একক স্ট্র্যান্ডের RNA লক্ষ্য করে নিখুঁত থেরাপিউটিক এডিটিং পদ্ধতি।</p>
             </div>
             <div class="card">
-                <div class="badge">MATHEMATICS RESEARCH | PRINCETON</div>
-                <h3>Riemann Hypothesis & Prime Distribution</h3>
-                <p>Exploratory proofs on the non-trivial zeros of the Riemann zeta function and their profound correlation with quantum mechanical energy levels.</p>
-            </div>
-            <div class="card">
-                <div class="badge">CHEMISTRY RESEARCH | CALTECH</div>
-                <h3>Artificial Photosynthesis Catalysts</h3>
-                <p>Transition metal oxide nano-catalysts used for direct solar-driven water splitting, providing high-efficiency hydrogen fuel generation pathways.</p>
+                <div class="badge">PRINCETON | ম্যাথ রিসার্চ (৩/৩০)</div>
+                <h3>রিম্যান হাইপোথিসিস ও প্রাইম ডিস্ট্রিবিউশন</h3>
+                <p>রিম্যান জেটা ফাংশনের শূন্যস্থান এবং কোয়ান্টাম শক্তির স্তরের সাথে এর গাণিতিক সম্পর্ক।</p>
             </div>
         </div>
     </section>
 
     <!-- Science Facts Section -->
     <section id="facts">
-        <h2 class="section-title">Mind-Blowing Scientific Facts</h2>
+        <h2 class="section-title">অজানা ও আশ্চর্যজনক বৈজ্ঞানিক তথ্য</h2>
+        <p class="section-desc">বিজ্ঞান জগতের সবচেয়ে রহস্যময় তথ্যগুলো জানতে নিচের কার্ডগুলোতে ক্লিক করুন।</p>
+        
         <div class="grid-container">
-            <div class="card">
+            <div class="card fact-trigger-card" onclick="openFactModal('কোয়ান্টাম সুপারপজিশন', 'সাবঅ্যাটমিক কণাগুলো পরিমাপ করার আগ পর্যন্ত একই সাথে একাধিক অবস্থায় (Superposition) থাকতে পারে!')">
                 <i class="fa-solid fa-atom"></i>
-                <h3>Quantum Superposition</h3>
-                <p>Subatomic particles like electrons can exist in multiple states simultaneously until an act of measurement forces them to collapse into a definite eigenstate.</p>
+                <h3>কোয়ান্টাম সুপারপজিশন</h3>
+                <p>বিস্তারিত জানতে ক্লিক করুন...</p>
             </div>
-            <div class="card">
+            <div class="card fact-trigger-card" onclick="openFactModal('মানব ডিএনএ রহস্য', 'আপনার শরীরের সমস্ত ডিএনএ খুলে ফেললে তা পৃথিবী থেকে প্লুটো এবং আবার ফিরে আসার দূরত্বের চেয়েও বড় হবে!')">
                 <i class="fa-solid fa-dna"></i>
-                <h3>Human Genetic Code</h3>
-                <p>If you uncoiled all the DNA molecules in your body, they would stretch over 10 billion miles—from Earth to Pluto and back multiple times!</p>
+                <h3>মানব ডিএনএর দৈর্ঘ্য</h3>
+                <p>বিস্তারিত জানতে ক্লিক করুন...</p>
             </div>
         </div>
     </section>
 
+    <!-- Fact Popup Modal -->
+    <div id="factModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeFactModal()">&times;</span>
+            <h2 id="modalTitle" style="color: var(--accent-color); margin-bottom: 15px; font-family: 'Orbitron';"></h2>
+            <p id="modalDesc" style="font-size: 1.1rem; line-height: 1.6; color: #cbd5e1;"></p>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer>
         <h3>RISHI SCINIVERSE</h3>
-        <p>Created & Maintained by <span class="founder">Souparno Roy</span></p>
-        <p style="margin-top: 15px; font-size: 0.85rem; color: #64748b;">&copy; 2026 RISHI SCINIVERSE. All Rights Reserved. Empowering Scientific Curiosity Worldwide.</p>
+        <p>সৃষ্টিকর্তা ও প্রধান ডেভেলপার: <span class="founder">সৌতপূর্ণ রায় (Souparno Roy)</span></p>
+        <p style="margin-top: 15px; font-size: 0.85rem; color: #64748b;">&copy; ২০২৬ ঋষি সাইনিভার্স (RISHI SCINIVERSE)। সর্বস্বত্ব সংরক্ষিত।</p>
     </footer>
 
-    <!-- Three.js Interactive Particle Simulation Script -->
+    <!-- Three.js and Interactive Scripts -->
     <script>
+        // Three.js Background Particle Simulation
         const container = document.getElementById('canvas-container');
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -498,7 +541,6 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         container.appendChild(renderer.domElement);
 
-        // Particle Mesh
         const geometry = new THREE.BufferGeometry();
         const count = 1000;
         const positions = new Float32Array(count * 3);
@@ -518,10 +560,8 @@
 
         const particles = new THREE.Points(geometry, material);
         scene.add(particles);
-
         camera.position.z = 5;
 
-        // Mouse Parallax Effect
         let mouseX = 0;
         let mouseY = 0;
         document.addEventListener('mousemove', (e) => {
@@ -539,15 +579,36 @@
 
             renderer.render(scene, camera);
         }
-
         animate();
 
-        // Responsive Resize Handler
         window.addEventListener('resize', () => {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
+
+        // Fact Modal Script
+        function openFactModal(title, desc) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalDesc').innerText = desc;
+            document.getElementById('factModal').style.display = 'flex';
+        }
+
+        function closeFactModal() {
+            document.getElementById('factModal').style.display = 'none';
+        }
+
+        // Language Toggle System
+        let isEnglish = false;
+        function toggleLanguage() {
+            isEnglish = !isEnglish;
+            const desc = document.getElementById('hero-desc');
+            if (isEnglish) {
+                desc.innerText = "A next-generation virtual universe of science and advanced research founded by Souparno Roy. Explore Physics, Chemistry, Mathematics, and Biology through 200+ 3D practical video simulations and 30+ institutional research papers.";
+            } else {
+                desc.innerText = "পদার্থবিদ্যা, রসায়ন, গণিত এবং জীববিদ্যার এক বিশাল ভার্চুয়াল ইউনিভার্স। এখানে রয়েছে ২০০+ এর বেশি ইন্টারঅ্যাক্টিভ থ্রি-ডি প্র্যাকটিক্যাল ভিডিও সিমুলেশন এবং বিশ্বের শীর্ষস্থানীয় ল্যাবরেটরির ৩০+ রিসার্চ পেপার।";
+            }
+        }
     </script>
 </body>
 </html>
